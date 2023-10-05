@@ -44,17 +44,9 @@
         <script src="js/vendor/modernizr.min.js"></script>
     </head>
     <body>
-        <!-- Page Wrapper -->
-        <!-- In the PHP version you can set the following options from inc/config file -->
-        <!--
-            Available classes:
-
-            'page-loading'      enables page preloader
-        -->
+        
         <div id="page-wrapper">
-            <!-- Preloader -->
-            <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
-            <!-- Used only if page preloader is enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
+            
             <div class="preloader themed-background">
                 <h1 class="push-top-bottom text-light text-center"><strong>Pro</strong>UI</h1>
                 <div class="inner">
@@ -64,37 +56,6 @@
             </div>
             <!-- END Preloader -->
 
-            <!-- Page Container -->
-            <!-- In the PHP version you can set the following options from inc/config file -->
-            <!--
-                Available #page-container classes:
-
-                '' (None)                                       for a full main and alternative sidebar hidden by default (> 991px)
-
-                'sidebar-visible-lg'                            for a full main sidebar visible by default (> 991px)
-                'sidebar-partial'                               for a partial main sidebar which opens on mouse hover, hidden by default (> 991px)
-                'sidebar-partial sidebar-visible-lg'            for a partial main sidebar which opens on mouse hover, visible by default (> 991px)
-                'sidebar-mini sidebar-visible-lg-mini'          for a mini main sidebar with a flyout menu, enabled by default (> 991px + Best with static layout)
-                'sidebar-mini sidebar-visible-lg'               for a mini main sidebar with a flyout menu, disabled by default (> 991px + Best with static layout)
-
-                'sidebar-alt-visible-lg'                        for a full alternative sidebar visible by default (> 991px)
-                'sidebar-alt-partial'                           for a partial alternative sidebar which opens on mouse hover, hidden by default (> 991px)
-                'sidebar-alt-partial sidebar-alt-visible-lg'    for a partial alternative sidebar which opens on mouse hover, visible by default (> 991px)
-
-                'sidebar-partial sidebar-alt-partial'           for both sidebars partial which open on mouse hover, hidden by default (> 991px)
-
-                'sidebar-no-animations'                         add this as extra for disabling sidebar animations on large screens (> 991px) - Better performance with heavy pages!
-
-                'style-alt'                                     for an alternative main style (without it: the default style)
-                'footer-fixed'                                  for a fixed footer (without it: a static footer)
-
-                'disable-menu-autoscroll'                       add this to disable the main menu auto scrolling when opening a submenu
-
-                'header-fixed-top'                              has to be added only if the class 'navbar-fixed-top' was added on header.navbar
-                'header-fixed-bottom'                           has to be added only if the class 'navbar-fixed-bottom' was added on header.navbar
-
-                'enable-cookies'                                enables cookies for remembering active color theme when changed from the sidebar links
-            -->
             <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
                 <!-- Alternative Sidebar -->
                 <div id="sidebar-alt">
@@ -112,24 +73,6 @@
                                 <li>
                                     <a href="javascript:void(0)" class="chat-user-online">
                                         <span></span>
-                                        <img src="img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="chat-user-online">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="chat-user-online">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar10.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="chat-user-online">
-                                        <span></span>
                                         <img src="img/placeholders/avatars/avatar4.jpg" alt="avatar" class="img-circle">
                                     </a>
                                 </li>
@@ -140,45 +83,9 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)" class="chat-user-away">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar9.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="javascript:void(0)" class="chat-user-busy">
                                         <span></span>
                                         <img src="img/placeholders/avatars/avatar16.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar1.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar4.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar3.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar13.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar5.jpg" alt="avatar" class="img-circle">
                                     </a>
                                 </li>
                             </ul>
@@ -252,58 +159,6 @@
                             </div>
                             <!-- END User Info -->
 
-                            <!-- Theme Colors -->
-                            <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
-                            <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
-                                <!-- You can also add the default color theme
-                                <li class="active">
-                                    <a href="javascript:void(0)" class="themed-background-dark-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default Blue"></a>
-                                </li>
-                                -->
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-night themed-border-night" data-theme="css/themes/night.css" data-toggle="tooltip" title="Night"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-modern themed-border-modern" data-theme="css/themes/modern.css" data-toggle="tooltip" title="Modern"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-autumn themed-border-autumn" data-theme="css/themes/autumn.css" data-toggle="tooltip" title="Autumn"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-flatie themed-border-flatie" data-theme="css/themes/flatie.css" data-toggle="tooltip" title="Flatie"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-spring themed-border-spring" data-theme="css/themes/spring.css" data-toggle="tooltip" title="Spring"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-fancy themed-border-fancy" data-theme="css/themes/fancy.css" data-toggle="tooltip" title="Fancy"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-fire themed-border-fire" data-theme="css/themes/fire.css" data-toggle="tooltip" title="Fire"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-coral themed-border-coral" data-theme="css/themes/coral.css" data-toggle="tooltip" title="Coral"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-lake themed-border-lake" data-theme="css/themes/lake.css" data-toggle="tooltip" title="Lake"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-forest themed-border-forest" data-theme="css/themes/forest.css" data-toggle="tooltip" title="Forest"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-waterlily themed-border-waterlily" data-theme="css/themes/waterlily.css" data-toggle="tooltip" title="Waterlily"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-emerald themed-border-emerald" data-theme="css/themes/emerald.css" data-toggle="tooltip" title="Emerald"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-blackberry themed-border-blackberry" data-theme="css/themes/blackberry.css" data-toggle="tooltip" title="Blackberry"></a>
-                                </li>
-                            </ul>
-                            <!-- END Theme Colors -->
 
                             <!-- Sidebar Navigation -->
                             <ul class="sidebar-nav">
@@ -333,134 +188,6 @@
                                 <li>
                                     <a href="page_ecom_customer_view.html">Customer View</a>
                                 </li>
-                               
-                                <li class="sidebar-header">
-                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
-                                    <span class="sidebar-header-title">Develop Kit</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-brush sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Ready Pages</span></a>
-                                    <ul>
-                                        <li>
-                                            <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i>Errors</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="page_ready_400.html">400</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_401.html">401</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_403.html">403</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_404.html">404</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_500.html">500</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_503.html">503</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_contacts.html">Contacts</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i>Message Center</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="page_ready_inbox.html">Inbox</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_inbox_compose.html">Compose Message</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_inbox_message.html">View Message</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_chat.html">Chat</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_timeline.html">Timeline</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_files.html">Files</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_tickets.html">Tickets</a>
-                                        </li>
-                                       
-                                        <li>
-                                            <a href="page_ready_tasks.html">Tasks</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_faq.html">FAQ</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_pricing_tables.html">Pricing Tables</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_ready_invoice.html">Invoice</a>
-                                        </li>
-                                        
-                                        <li>
-                                            <a href="page_ready_coming_soon.html">Coming Soon</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i>Login, Register &amp; Lock</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="login.html">Login</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login_full.html">Login (Full Background)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login_alt.html">Login 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login.html#reminder">Password Reminder</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login_alt.html#reminder">Password Reminder 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login.html#register">Register</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login_alt.html#register">Register 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_lock_screen.html">Lock Screen</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_ready_lock_screen_alt.html">Lock Screen 2</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-wrench sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Components</span></a>
-                                    <ul>
-                                        <li>
-                                            <a href="page_comp_maps.html">Maps</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_comp_carousel.html">Carousel</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_comp_calendar.html">Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="page_comp_animations.html">CSS3 Animations</a>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                             <!-- END Sidebar Navigation -->
 
@@ -474,19 +201,6 @@
                 <!-- Main Container -->
                 <div id="main-container">
                     <!-- Header -->
-                    <!-- In the PHP version you can set the following options from inc/config file -->
-                    <!--
-                        Available header.navbar classes:
-
-                        'navbar-default'            for the default light header
-                        'navbar-inverse'            for an alternative dark header
-
-                        'navbar-fixed-top'          for a top fixed header (fixed sidebars with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar())
-                            'header-fixed-top'      has to be added on #page-container only if the class 'navbar-fixed-top' was added
-
-                        'navbar-fixed-bottom'       for a bottom fixed header (fixed sidebars with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
-                            'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
-                    -->
                     <header class="navbar navbar-default">
                         <!-- Left Header Navigation -->
                         <ul class="nav navbar-nav-custom">
@@ -497,31 +211,6 @@
                                 </a>
                             </li>
                             <!-- END Main Sidebar Toggle Button -->
-
-                            <!-- Template Options -->
-                            <!-- Change Options functionality can be found in js/app.js - templateOptions() -->
-                            <li class="dropdown">
-                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="gi gi-settings"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-custom dropdown-options">
-                                    <li class="dropdown-header text-center">Header Style</li>
-                                    <li>
-                                        <div class="btn-group btn-group-justified btn-group-sm">
-                                            <a href="javascript:void(0)" class="btn btn-primary" id="options-header-default">Light</a>
-                                            <a href="javascript:void(0)" class="btn btn-primary" id="options-header-inverse">Dark</a>
-                                        </div>
-                                    </li>
-                                    <li class="dropdown-header text-center">Page Style</li>
-                                    <li>
-                                        <div class="btn-group btn-group-justified btn-group-sm">
-                                            <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style">Default</a>
-                                            <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style-alt">Alternative</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- END Template Options -->
                         </ul>
                         <!-- END Left Header Navigation -->
 
@@ -800,30 +489,6 @@
                                                     </div>
                                                 </li>
                                                 <li class="active">
-                                                    <div class="timeline-icon"><i class="gi gi-drink"></i></div>
-                                                    <div class="timeline-time"><small>3 hours ago</small></div>
-                                                    <div class="timeline-content">
-                                                        <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Ella Winter</strong></a></p>
-                                                        <p class="push-bit"><strong>Happy Hour!</strong> Free drinks at <a href="javascript:void(0)">Cafe-Bar</a> all day long!</p>
-                                                        <div id="gmap-timeline" class="gmap"></div>
-                                                    </div>
-                                                </li>
-                                                <li class="active">
-                                                    <div class="timeline-icon"><i class="fa fa-cutlery"></i></div>
-                                                    <div class="timeline-time"><small>yesterday</small></div>
-                                                    <div class="timeline-content">
-                                                        <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Patricia Woods</strong></a></p>
-                                                        <p class="push-bit">Today I had the lunch of my life! It was delicious!</p>
-                                                        <div class="row push">
-                                                            <div class="col-sm-6 col-md-4">
-                                                                <a href="img/placeholders/photos/photo23.jpg" data-toggle="lightbox-image">
-                                                                    <img src="img/placeholders/photos/photo23.jpg" alt="image">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="active">
                                                     <div class="timeline-icon themed-background-fire themed-border-fire"><i class="fa fa-smile-o"></i></div>
                                                     <div class="timeline-time"><small>2 days ago</small></div>
                                                     <div class="timeline-content">
@@ -896,38 +561,6 @@
                                 </div>
                                 <!-- END Your Plan Widget -->
 
-                                <!-- Charts Widget -->
-                                <div class="widget">
-                                    <div class="widget-advanced widget-advanced-alt">
-                                        <!-- Widget Header -->
-                                        <div class="widget-header text-center themed-background">
-                                            <h3 class="widget-content-light text-left pull-left animation-pullDown">
-                                                <strong>Sales</strong> &amp; <strong>Earnings</strong><br>
-                                                <small>Last Year</small>
-                                            </h3>
-                                            <!-- Flot Charts (initialized in js/pages/index.js), for more examples you can check out http://www.flotcharts.org/ -->
-                                            <div id="dash-widget-chart" class="chart"></div>
-                                        </div>
-                                        <!-- END Widget Header -->
-
-                                        <!-- Widget Main -->
-                                        <div class="widget-main">
-                                            <div class="row text-center">
-                                                <div class="col-xs-4">
-                                                    <h3 class="animation-hatch"><strong>7.500</strong><br><small>Clients</small></h3>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <h3 class="animation-hatch"><strong>10.970</strong><br><small>Sales</small></h3>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <h3 class="animation-hatch">$<strong>31.230</strong><br><small>Earnings</small></h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END Widget Main -->
-                                    </div>
-                                </div>
-                                <!-- END Charts Widget -->
 
                                 <!-- Weather Widget -->
                                 <div class="widget">
@@ -1049,81 +682,14 @@
         </div>
         <!-- END Page Wrapper -->
 
-        <!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
-        <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
+        
+	<!-- ================ footer Section start Here =============== -->
+  
+    <?php include('./includes/footer.php'); ?>
 
-        <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
-        <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header text-center">
-                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Settings</h2>
-                    </div>
-                    <!-- END Modal Header -->
+    <!-- ================ footer Section end Here =============== -->
 
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                        <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-                            <fieldset>
-                                <legend>Vital Info</legend>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Username</label>
-                                    <div class="col-md-8">
-                                        <p class="form-control-static">Admin</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-email">Email</label>
-                                    <div class="col-md-8">
-                                        <input type="email" id="user-settings-email" name="user-settings-email" class="form-control" value="admin@example.com">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-notifications">Email Notifications</label>
-                                    <div class="col-md-8">
-                                        <label class="switch switch-primary">
-                                            <input type="checkbox" id="user-settings-notifications" name="user-settings-notifications" value="1" checked>
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Password Update</legend>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-password">New Password</label>
-                                    <div class="col-md-8">
-                                        <input type="password" id="user-settings-password" name="user-settings-password" class="form-control" placeholder="Please choose a complex one..">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-repassword">Confirm New Password</label>
-                                    <div class="col-md-8">
-                                        <input type="password" id="user-settings-repassword" name="user-settings-repassword" class="form-control" placeholder="..and confirm it!">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="form-group form-actions">
-                                <div class="col-xs-12 text-right">
-                                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- END Modal Body -->
-                </div>
-            </div>
-        </div>
-        <!-- END User Settings -->
-
-        <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
-        <script src="js/vendor/jquery.min.js"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/app.js"></script>
-
+    
         <!-- Google Maps API Key (you will have to obtain a Google Maps API key to use Google Maps) -->
         <!-- For more info please have a look at https://developers.google.com/maps/documentation/javascript/get-api-key#key -->
         <script src="https://maps.googleapis.com/maps/api/js?key="></script>
