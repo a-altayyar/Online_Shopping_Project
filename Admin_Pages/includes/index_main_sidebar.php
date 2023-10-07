@@ -77,7 +77,7 @@
                     <a href="page_ready_timeline.php" <?= ($active == "timeline") ? "class=' active'" : "" ?>>Timeline</a>
                 </li>
                 <li>
-                    <a href="page_ready_faq.php">FAQ</a>
+                    <a href="page_ready_faq.php" <?= ($active == "faq") ? "class=' active'" : "" ?>>FAQ</a>
                 </li>
                 <li>
                     <a href="page_ready_inbox.php" <?= ($active == "inbox") ? "class=' active'" : "" ?>>Inbox</a>
