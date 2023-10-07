@@ -1,48 +1,7 @@
-<!DOCTYPE html>
-<!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-
-        <title>ProUI - Responsive Bootstrap Admin Template</title>
-
-        <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
-        <meta name="author" content="pixelcave">
-        <meta name="robots" content="noindex, nofollow">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
-
-        <!-- Icons -->
-        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="img/favicon.png">
-        <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
-        <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
-        <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
-        <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
-        <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
-        <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
-        <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
-        <link rel="apple-touch-icon" href="img/icon180.png" sizes="180x180">
-        <!-- END Icons -->
-
-        <!-- Stylesheets -->
-        <!-- Bootstrap is included in its original form, unaltered -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-
-        <!-- Related styles of various icon packs and plugins -->
-        <link rel="stylesheet" href="css/plugins.css">
-
-        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
-        <link rel="stylesheet" href="css/main.css">
-
-        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
-
-        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
-        <link rel="stylesheet" href="css/themes.css">
-        <!-- END Stylesheets -->
-
-        <!-- Modernizr (browser feature detection library) -->
-        <script src="js/vendor/modernizr.min.js"></script>
-    </head>
+<?php 
+$title ="sum";
+include('./includes/header.php'); 
+?>
     <body>
         <!-- Page Wrapper -->
         <!-- In the PHP version you can set the following options from inc/config file -->
@@ -367,7 +326,7 @@
                                 <li>
                                     <a href="index2.html"><i class="gi gi-leaf sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard 2</span></a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-shopping_cart sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">eCommerce</span></a>
                                     <ul>
                                         <li>
@@ -383,7 +342,7 @@
                                             <a href="page_ecom_products.html">Products</a>
                                         </li>
                                         <li>
-                                            <a href="page_ecom_product_edit.html" class=" active">Product Edit</a>
+                                            <a href="page_ecom_product_edit.html">Product Edit</a>
                                         </li>
                                         <li>
                                             <a href="page_ecom_customer_view.html">Customer View</a>
@@ -535,7 +494,7 @@
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
                                     <span class="sidebar-header-title">Develop Kit</span>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-brush sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Ready Pages</span></a>
                                     <ul>
                                         <li>
@@ -631,7 +590,7 @@
                                             <a href="page_ready_tasks.html">Tasks</a>
                                         </li>
                                         <li>
-                                            <a href="page_ready_faq.html">FAQ</a>
+                                            <a href="page_ready_faq.html" class=" active">FAQ</a>
                                         </li>
                                         <li>
                                             <a href="page_ready_pricing_tables.html">Pricing Tables</a>
@@ -899,240 +858,147 @@
 
                     <!-- Page content -->
                     <div id="page-content">
-                        <!-- eCommerce Product Edit Header -->
+                        <!-- FAQ Header -->
                         <div class="content-header">
-                            <ul class="nav-horizontal text-center">
-                                <li>
-                                    <a href="page_ecom_dashboard.html"><i class="fa fa-bar-chart"></i> Dashboard</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_orders.html"><i class="gi gi-shop_window"></i> Orders</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_order_view.html"><i class="gi gi-shopping_cart"></i> Order View</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_products.html"><i class="gi gi-shopping_bag"></i> Products</a>
-                                </li>
-                                <li class="active">
-                                    <a href="page_ecom_product_edit.html"><i class="gi gi-pencil"></i> Product Edit</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_customer_view.html"><i class="gi gi-user"></i> Customer View</a>
-                                </li>
-                            </ul>
+                            <div class="header-section">
+                                <h1>
+                                    <i class="fa fa-info"></i>Frequently Asked Questions<br><small>Answers for all your users’ questions!</small>
+                                </h1>
+                            </div>
                         </div>
-                        <!-- END eCommerce Product Edit Header -->
+                        <ul class="breadcrumb breadcrumb-top">
+                            <li>Pages</li>
+                            <li><a href="">FAQ</a></li>
+                        </ul>
+                        <!-- END FAQ Header -->
 
-                        <!-- Product Edit Content -->
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <!-- General Data Block -->
-                                <div class="block">
-                                    <!-- General Data Title -->
-                                    <div class="block-title">
-                                        <h2><i class="fa fa-pencil"></i> <strong>General</strong> Data</h2>
+                        <!-- FAQ Block -->
+                        <div class="block block-alt-noborder">
+                            <!-- FAQ Content -->
+                            <div class="row">
+                                <div class="col-md-6 col-lg-3 col-lg-offset-1">
+                                    <div class="block-section">
+                                        <h3 class="sub-header text-center"><strong>Boost your creativity now!</strong></h3>
+                                        <p class="clearfix"><i class="fa fa-clock-o fa-5x text-danger pull-left animation-pulse"></i>Sign up today and receive <span class="text-success"><strong>30% discount</strong></span> on all plans! Our web application will save you time and enable you to work faster and more efficiently.</p>
+                                        <p>
+                                            <a href="page_ready_pricing_tables.html" class="btn btn-lg btn-success btn-block">Get Started Now</a>
+                                        </p>
                                     </div>
-                                    <!-- END General Data Title -->
-
-                                    <!-- General Data Content -->
-                                    <form action="page_ecom_product_edit.html" method="post" class="form-horizontal form-bordered" onsubmit="return false;">
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-id">PID</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="product-id" name="product-id" class="form-control" value="6825">
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-lg-offset-1">
+                                    <!-- Intro Content -->
+                                    <h3 class="sub-header"><strong>Welcome</strong></h3>
+                                    <div id="faq1" class="panel-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q1">What does your App have to offer?</a></h4>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-name">Name</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="product-name" name="product-name" class="form-control" placeholder="Enter product name..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-description">Description</label>
-                                            <div class="col-md-9">
-                                                <!-- CKEditor, you just need to include the plugin (see at the bottom of this page) and add the class 'ckeditor' to your textarea -->
-                                                <!-- More info can be found at http://ckeditor.com -->
-                                                <textarea id="product-description" name="product-description" class="ckeditor"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-short-description">Short Description</label>
-                                            <div class="col-md-9">
-                                                <textarea id="product-short-description" name="product-short-description" class="form-control" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-category">Category</label>
-                                            <div class="col-md-8">
-                                                <!-- Chosen plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://harvesthq.github.io/chosen/ -->
-                                                <select id="product-category" name="product-category" class="select-chosen" data-placeholder="Choose Category.." style="width: 250px;">
-                                                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                                    <option value="1">Tablets</option>
-                                                    <option value="2">Laptops</option>
-                                                    <option value="3">PCs</option>
-                                                    <option value="4">Consoles</option>
-                                                    <option value="5">Movies</option>
-                                                    <option value="6">Books</option>
-                                                    <option value="7">Cables</option>
-                                                    <option value="8">Adapters</option>
-                                                    <option value="9">Office</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-price">Price</label>
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                                    <input type="text" id="product-price" name="product-price" class="form-control" placeholder="0,00">
+                                            <div id="faq1_q1" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus.</p>
+                                                    <p class="remove-margin">Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Condition</label>
-                                            <div class="col-md-9">
-                                                <label class="radio-inline" for="product-condition-new">
-                                                    <input type="radio" id="product-condition-new" name="product-condition" value="condition_new" checked> New
-                                                </label>
-                                                <label class="radio-inline" for="product-condition-used">
-                                                    <input type="radio" id="product-condition-used" name="product-condition" value="condition_used"> Used
-                                                </label>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q2">Who built this App?</a></h4>
+                                            </div>
+                                            <div id="faq1_q2" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Published?</label>
-                                            <div class="col-md-9">
-                                                <label class="switch switch-primary">
-                                                    <input type="checkbox" id="product-status" name="product-status" checked><span></span>
-                                                </label>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q3">Are there any big companies using it?</a></h4>
+                                            </div>
+                                            <div id="faq1_q3" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
                                             </div>
                                         </div>
-                                        <div class="form-group form-actions">
-                                            <div class="col-md-9 col-md-offset-3">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Save</button>
-                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
+                                    </div>
+                                    <!-- END Intro Content -->
+
+                                    <!-- Features Content -->
+                                    <h3 class="sub-header"><strong>Features</strong></h3>
+                                    <div id="faq2" class="panel-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq2" href="#faq2_q1">Does your App support mobile phones?</a></h4>
+                                            </div>
+                                            <div id="faq2_q1" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
                                             </div>
                                         </div>
-                                    </form>
-                                    <!-- END General Data Content -->
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq2" href="#faq2_q2">Is my data auto backed up regularly?</a></h4>
+                                            </div>
+                                            <div id="faq2_q2" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq2" href="#faq2_q3">Is my data secured?</a></h4>
+                                            </div>
+                                            <div id="faq2_q3" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq2" href="#faq2_q4">Are you working on new features?</a></h4>
+                                            </div>
+                                            <div id="faq2_q4" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq2" href="#faq2_q5">What are your best features?</a></h4>
+                                            </div>
+                                            <div id="faq2_q5" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END Features Content -->
+
+                                    <!-- Subscriptions Content -->
+                                    <h3 class="sub-header"><strong>Subscriptions</strong></h3>
+                                    <div id="faq3" class="panel-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq3" href="#faq3_q1">What are the available plans?</a></h4>
+                                            </div>
+                                            <div id="faq3_q1" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq3" href="#faq3_q2">What are the available payment options?</a></h4>
+                                            </div>
+                                            <div id="faq3_q2" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq3" href="#faq3_q3">Can I cancel my subscription anytime?</a></h4>
+                                            </div>
+                                            <div id="faq3_q3" class="panel-collapse collapse">
+                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END Subscriptions Content -->
                                 </div>
-                                <!-- END General Data Block -->
                             </div>
-                            <div class="col-lg-6">
-                                <!-- Meta Data Block -->
-                                <div class="block">
-                                    <!-- Meta Data Title -->
-                                    <div class="block-title">
-                                        <h2><i class="fa fa-google"></i> <strong>Meta</strong> Data</h2>
-                                    </div>
-                                    <!-- END Meta Data Title -->
-
-                                    <!-- Meta Data Content -->
-                                    <form action="page_ecom_product_edit.html" method="post" class="form-horizontal form-bordered" onsubmit="return false;">
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-meta-title">Meta Title</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="product-meta-title" name="product-meta-title" class="form-control" placeholder="Enter meta title..">
-                                                <div class="help-block">55 Characters Max</div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-meta-keywords">Meta Keywords</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="product-meta-keywords" name="product-meta-keywords" class="form-control" placeholder="keyword1, keyword2, keyword3">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="product-meta-description">Meta Description</label>
-                                            <div class="col-md-9">
-                                                <textarea id="product-meta-description" name="product-meta-description" class="form-control" rows="6" placeholder="Enter meta description.."></textarea>
-                                                <div class="help-block">115 Characters Max</div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-actions">
-                                            <div class="col-md-9 col-md-offset-3">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Save</button>
-                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <!-- END Meta Data Content -->
-                                </div>
-                                <!-- END Meta Data Block -->
-
-                                <!-- Product Images Block -->
-                                <div class="block">
-                                    <!-- Product Images Title -->
-                                    <div class="block-title">
-                                        <h2><i class="fa fa-picture-o"></i> <strong>Product</strong> Images</h2>
-                                    </div>
-                                    <!-- END Product Images Title -->
-
-                                    <!-- Product Images Content -->
-                                    <div class="block-section">
-                                        <!-- Dropzone.js, You can check out https://github.com/enyo/dropzone/wiki for usage examples -->
-                                        <form action="page_ecom_product_edit.html" class="dropzone"></form>
-                                    </div>
-                                    <table class="table table-bordered table-striped table-vcenter">
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 20%;">
-                                                    <a href="img/placeholders/photos/photo11.jpg" data-toggle="lightbox-image">
-                                                        <img src="img/placeholders/photos/photo11.jpg" alt="" class="img-responsive center-block" style="max-width: 110px;">
-                                                    </a>
-                                                </td>
-                                                <td class="text-center">
-                                                    <label class="switch switch-primary">
-                                                        <input type="checkbox" checked><span></span>
-                                                    </label>
-                                                    Cover
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="javascript:void(0)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="img/placeholders/photos/photo13.jpg" data-toggle="lightbox-image">
-                                                        <img src="img/placeholders/photos/photo13.jpg" alt="" class="img-responsive center-block" style="max-width: 110px;">
-                                                    </a>
-                                                </td>
-                                                <td class="text-center">
-                                                    <label class="switch switch-primary">
-                                                        <input type="checkbox"><span></span>
-                                                    </label>
-                                                    Cover
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="javascript:void(0)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="img/placeholders/photos/photo9.jpg" data-toggle="lightbox-image">
-                                                        <img src="img/placeholders/photos/photo9.jpg" alt="" class="img-responsive center-block" style="max-width: 110px;">
-                                                    </a>
-                                                </td>
-                                                <td class="text-center">
-                                                    <label class="switch switch-primary">
-                                                        <input type="checkbox"><span></span>
-                                                    </label>
-                                                    Cover
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="javascript:void(0)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- END Product Images Content -->
-                                </div>
-                                <!-- END Product Images Block -->
-                            </div>
+                            <!-- END FAQ Content -->
                         </div>
-                        <!-- END Product Edit Content -->
+                        <!-- END FAQ Block -->
                     </div>
                     <!-- END Page Content -->
 
@@ -1153,82 +1019,11 @@
         </div>
         <!-- END Page Wrapper -->
 
-        <!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
-        <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
+	<!-- ================ footer Section start Here =============== -->
+  
+    <?php include('./includes/footer.php'); ?>
 
-        <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
-        <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header text-center">
-                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Settings</h2>
-                    </div>
-                    <!-- END Modal Header -->
+    <!-- ================ footer Section end Here =============== -->
 
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                        <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-                            <fieldset>
-                                <legend>Vital Info</legend>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Username</label>
-                                    <div class="col-md-8">
-                                        <p class="form-control-static">Admin</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-email">Email</label>
-                                    <div class="col-md-8">
-                                        <input type="email" id="user-settings-email" name="user-settings-email" class="form-control" value="admin@example.com">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-notifications">Email Notifications</label>
-                                    <div class="col-md-8">
-                                        <label class="switch switch-primary">
-                                            <input type="checkbox" id="user-settings-notifications" name="user-settings-notifications" value="1" checked>
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Password Update</legend>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-password">New Password</label>
-                                    <div class="col-md-8">
-                                        <input type="password" id="user-settings-password" name="user-settings-password" class="form-control" placeholder="Please choose a complex one..">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-repassword">Confirm New Password</label>
-                                    <div class="col-md-8">
-                                        <input type="password" id="user-settings-repassword" name="user-settings-repassword" class="form-control" placeholder="..and confirm it!">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="form-group form-actions">
-                                <div class="col-xs-12 text-right">
-                                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- END Modal Body -->
-                </div>
-            </div>
-        </div>
-        <!-- END User Settings -->
-
-        <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
-        <script src="js/vendor/jquery.min.js"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/app.js"></script>
-
-        <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
-        <script src="js/helpers/ckeditor/ckeditor.js"></script>
     </body>
 </html>

@@ -1,288 +1,41 @@
-<!DOCTYPE html>
-<!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-
-        <title>live ProUI - Responsive Bootstrap Admin Template</title>
-
-        <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
-        <meta name="author" content="pixelcave">
-        <meta name="robots" content="noindex, nofollow">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
-
-        <!-- Icons -->
-        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="img/favicon.png">
-        <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
-        <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
-        <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
-        <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
-        <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
-        <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
-        <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
-        <link rel="apple-touch-icon" href="img/icon180.png" sizes="180x180">
-        <!-- END Icons -->
-
-        <!-- Stylesheets -->
-        <!-- Bootstrap is included in its original form, unaltered -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-
-        <!-- Related styles of various icon packs and plugins -->
-        <link rel="stylesheet" href="css/plugins.css">
-
-        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
-        <link rel="stylesheet" href="css/main.css">
-
-        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
-
-        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
-        <link rel="stylesheet" href="css/themes.css">
-        <!-- END Stylesheets -->
-
-        <!-- Modernizr (browser feature detection library) -->
-        <script src="js/vendor/modernizr.min.js"></script>
-    </head>
+<?php 
+$title ="live ProUI";
+include('./includes/header.php'); 
+?>
     <body>
         
         <div id="page-wrapper">
             
-            <div class="preloader themed-background">
-                <h1 class="push-top-bottom text-light text-center"><strong>Pro</strong>UI</h1>
-                <div class="inner">
-                    <h3 class="text-light visible-lt-ie10"><strong>Loading..</strong></h3>
-                    <div class="preloader-spinner hidden-lt-ie10"></div>
-                </div>
-            </div>
+
+            <!-- Preloader -->
+            <?php include('./includes/index_preloader.php'); ?>
             <!-- END Preloader -->
 
+            
             <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+
                 <!-- Alternative Sidebar -->
-                <div id="sidebar-alt">
-                    <!-- Wrapper for scrolling functionality -->
-                    <div id="sidebar-alt-scroll">
-                        <!-- Sidebar Content -->
-                        <div class="sidebar-content">
-                            <!-- Chat -->
-                            <!-- Chat demo functionality initialized in js/app.js -> chatUi() -->
-                            <a href="page_ready_chat.html" class="sidebar-title">
-                                <i class="gi gi-comments pull-right"></i> <strong>Chat</strong>UI
-                            </a>
-                            <!-- Chat Users -->
-                            <ul class="chat-users clearfix">
-                                <li>
-                                    <a href="javascript:void(0)" class="chat-user-online">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar4.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="chat-user-away">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar7.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="chat-user-busy">
-                                        <span></span>
-                                        <img src="img/placeholders/avatars/avatar16.jpg" alt="avatar" class="img-circle">
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- END Chat Users -->
-
-                            <!-- Chat Talk -->
-                            <div class="chat-talk display-none">
-                                <!-- Chat Info -->
-                                <div class="chat-talk-info sidebar-section">
-                                    <button id="chat-talk-close-btn" class="btn btn-xs btn-default pull-right">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                    <img src="img/placeholders/avatars/avatar5.jpg" alt="avatar" class="img-circle pull-left">
-                                    <strong>John</strong> Doe
-                                </div>
-                                <!-- END Chat Info -->
-
-                                <!-- Chat Messages -->
-                                <ul class="chat-talk-messages">
-                                    <li class="text-center"><small>Yesterday, 18:35</small></li>
-                                    <li class="chat-talk-msg animation-slideRight">Hey admin?</li>
-                                    <li class="chat-talk-msg animation-slideRight">How are you?</li>
-                                    <li class="text-center"><small>Today, 7:10</small></li>
-                                    <li class="chat-talk-msg chat-talk-msg-highlight themed-border animation-slideLeft">I'm fine, thanks!</li>
-                                </ul>
-                                <!-- END Chat Messages -->
-
-                                <!-- Chat Input -->
-                                <form action="index.html" method="post" id="sidebar-chat-form" class="chat-form">
-                                    <input type="text" id="sidebar-chat-message" name="sidebar-chat-message" class="form-control form-control-borderless" placeholder="Type a message..">
-                                </form>
-                                <!-- END Chat Input -->
-                            </div>
-                            <!--  END Chat Talk -->
-                            <!-- END Chat -->
-
-                        </div>
-                        <!-- END Sidebar Content -->
-                    </div>
-                    <!-- END Wrapper for scrolling functionality -->
-                </div>
+                <?php include('./includes/index_alternative_sidebar.php'); ?>
                 <!-- END Alternative Sidebar -->
 
+
                 <!-- Main Sidebar -->
-                <div id="sidebar">
-                    <!-- Wrapper for scrolling functionality -->
-                    <div id="sidebar-scroll">
-                        <!-- Sidebar Content -->
-                        <div class="sidebar-content">
-                            <!-- Brand -->
-                            <a href="index.html" class="sidebar-brand">
-                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Pro</strong>UI</span>
-                            </a>
-                            <!-- END Brand -->
-
-                            <!-- User Info -->
-                            <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
-                                <div class="sidebar-user-avatar">
-                                    <a href="page_ready_user_profile.html">
-                                        <img src="img/placeholders/avatars/avatar2.jpg" alt="avatar">
-                                    </a>
-                                </div>
-                                <div class="sidebar-user-name">John Doe</div>
-                                <div class="sidebar-user-links">
-                                    <a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
-                                    <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
-                                    <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                    <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Settings" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
-                                    <a href="login.html" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
-                                </div>
-                            </div>
-                            <!-- END User Info -->
-
-
-                            <!-- Sidebar Navigation -->
-                            <ul class="sidebar-nav">
-                                <li>
-                                    <a href="index.html" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
-                                </li>
-                                
-                                <li class="sidebar-header">
-                                    <span class="sidebar-header-options clearfix"><a href="#" data-toggle="tooltip" ><i class="gi gi-shopping_cart"></i></a></span>
-                                    <span class="sidebar-header-title">eCommerce</span>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_dashboard.html"><span class="sidebar-nav-mini-hide">Dashboard </span></a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_orders.html">Orders</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_order_view.html">Order View</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_products.html">Products</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_product_edit.html">Product Edit</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_customer_view.html">Customer View</a>
-                                </li>
-                            </ul>
-                            <!-- END Sidebar Navigation -->
-
-                        </div>
-                        <!-- END Sidebar Content -->
-                    </div>
-                    <!-- END Wrapper for scrolling functionality -->
-                </div>
+                <?php 
+                $active= "index"; 
+                include('./includes/index_main_sidebar.php');
+                ?>
                 <!-- END Main Sidebar -->
+
 
                 <!-- Main Container -->
                 <div id="main-container">
+
+
                     <!-- Header -->
-                    <header class="navbar navbar-default">
-                        <!-- Left Header Navigation -->
-                        <ul class="nav navbar-nav-custom">
-                            <!-- Main Sidebar Toggle Button -->
-                            <li>
-                                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
-                                    <i class="fa fa-bars fa-fw"></i>
-                                </a>
-                            </li>
-                            <!-- END Main Sidebar Toggle Button -->
-                        </ul>
-                        <!-- END Left Header Navigation -->
-
-                        <!-- Search Form -->
-                        <form action="page_ready_search_results.html" method="post" class="navbar-form-custom">
-                            <div class="form-group">
-                                <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
-                            </div>
-                        </form>
-                        <!-- END Search Form -->
-
-                        <!-- Right Header Navigation -->
-                        <ul class="nav navbar-nav-custom pull-right">
-                            <!-- Alternative Sidebar Toggle Button -->
-                            <li>
-                                <!-- If you do not want the main sidebar to open when the alternative sidebar is closed, just remove the second parameter: App.sidebar('toggle-sidebar-alt'); -->
-                                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt', 'toggle-other');this.blur();">
-                                    <i class="gi gi-share_alt"></i>
-                                    <span class="label label-primary label-indicator animation-floating">4</span>
-                                </a>
-                            </li>
-                            <!-- END Alternative Sidebar Toggle Button -->
-
-                            <!-- User Dropdown -->
-                            <li class="dropdown">
-                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="img/placeholders/avatars/avatar2.jpg" alt="avatar"> <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                                    <li class="dropdown-header text-center">Account</li>
-                                    <li>
-                                        <a href="page_ready_timeline.html">
-                                            <i class="fa fa-clock-o fa-fw pull-right"></i>
-                                            <span class="badge pull-right">10</span>
-                                            Updates
-                                        </a>
-                                        <a href="page_ready_inbox.html">
-                                            <i class="fa fa-envelope-o fa-fw pull-right"></i>
-                                            <span class="badge pull-right">5</span>
-                                            Messages
-                                        </a>
-                                        
-                                        <a href="page_ready_faq.html"><i class="fa fa-question fa-fw pull-right"></i>
-                                            <span class="badge pull-right">11</span>
-                                            FAQ
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="page_ready_user_profile.html">
-                                            <i class="fa fa-user fa-fw pull-right"></i>
-                                            Profile
-                                        </a>
-                                        <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                        <a href="#modal-user-settings" data-toggle="modal">
-                                            <i class="fa fa-cog fa-fw pull-right"></i>
-                                            Settings
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="page_ready_lock_screen.html"><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a>
-                                        <a href="login.html"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
-                                    </li>
-                                    
-                                </ul>
-                            </li>
-                            <!-- END User Dropdown -->
-                        </ul>
-                        <!-- END Right Header Navigation -->
-                    </header>
+                    <?php include('./includes/index_header.php');?>
                     <!-- END Header -->
+
 
                     <!-- Page content -->
                     <div id="page-content">
@@ -665,16 +418,12 @@
                     </div>
                     <!-- END Page Content -->
 
+                    
                     <!-- Footer -->
-                    <footer class="clearfix">
-                        <div class="pull-right">
-                            Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
-                        </div>
-                        <div class="pull-left">
-                            <span id="year-copy"></span> &copy; <a href="https://1.envato.market/x4R" target="_blank">ProUI 3.8</a>
-                        </div>
-                    </footer>
+                    <?php include('./includes/index_footer.php'); ?>
                     <!-- END Footer -->
+
+
                 </div>
                 <!-- END Main Container -->
             </div>
