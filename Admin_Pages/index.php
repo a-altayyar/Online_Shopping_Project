@@ -98,8 +98,8 @@ include('./includes/header.php');
                                             <i class="fa fa-file-text"></i>
                                         </div>
                                         <h3 class="widget-content text-right animation-pullDown">
-                                            New <strong>Article</strong><br>
-                                            <small>Mountain Trip</small>
+                                            Add <strong>Product</strong><br>
+                                            <small>Product Today</small>
                                         </h3>
                                     </div>
                                 </a>

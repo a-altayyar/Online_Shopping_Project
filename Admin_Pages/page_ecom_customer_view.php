@@ -41,28 +41,10 @@ include('./includes/header.php');
                     <!-- Page content -->
                     <div id="page-content">
                         <!-- eCommerce Customer Header -->
-                        <div class="content-header">
-                            <ul class="nav-horizontal text-center">
-                                <li>
-                                    <a href="page_ecom_dashboard.html"><i class="fa fa-bar-chart"></i> Dashboard</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_orders.html"><i class="gi gi-shop_window"></i> Orders</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_order_view.html"><i class="gi gi-shopping_cart"></i> Order View</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_products.html"><i class="gi gi-shopping_bag"></i> Products</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_product_edit.html"><i class="gi gi-pencil"></i> Product Edit</a>
-                                </li>
-                                <li class="active">
-                                    <a href="page_ecom_customer_view.html"><i class="gi gi-user"></i> Customer View</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <?php 
+                        $act= "Customer"; 
+                        include('./includes/page_ecom_dashboard_header.php');
+                        ?>
                         <!-- END eCommerce Customer Header -->
 
                         <!-- Customer Content -->
@@ -88,8 +70,20 @@ include('./includes/header.php');
                                     <table class="table table-borderless table-striped table-vcenter">
                                         <tbody>
                                             <tr>
-                                                <td class="text-right" style="width: 50%;"><strong>Social Title</strong></td>
-                                                <td>Mr.</td>
+                                                <td class="text-right" style="width: 50%;"><strong>Customer ID</strong></td>
+                                                <td>001</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>User Name</strong></td>
+                                                <td>M.al000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>First Name</strong></td>
+                                                <td>Mohammed</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Last Name</strong></td>
+                                                <td>AL </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Birthdate</strong></td>
@@ -102,10 +96,6 @@ include('./includes/header.php');
                                             <tr>
                                                 <td class="text-right"><strong>Last Visit</strong></td>
                                                 <td>06/11/2014 - 09:41</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Language</strong></td>
-                                                <td>English (UK)</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Registrations</strong></td>
@@ -160,36 +150,6 @@ include('./includes/header.php');
                                             </h4>
                                         </div>
                                     </a>
-                                    <a href="javascript:void(0)" class="widget widget-hover-effect2 themed-background-muted-light">
-                                        <div class="widget-simple">
-                                            <div class="widget-icon pull-right themed-background-info">
-                                                <i class="fa fa-group"></i>
-                                            </div>
-                                            <h4 class="text-left text-info">
-                                                <strong>2</strong><br><small>Referred Members</small>
-                                            </h4>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="widget widget-hover-effect2 themed-background-muted-light">
-                                        <div class="widget-simple">
-                                            <div class="widget-icon pull-right themed-background-danger">
-                                                <i class="fa fa-heart"></i>
-                                            </div>
-                                            <h4 class="text-left text-danger">
-                                                <strong>15</strong><br><small>Favorite Products</small>
-                                            </h4>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="widget widget-hover-effect2 themed-background-muted-light">
-                                        <div class="widget-simple">
-                                            <div class="widget-icon pull-right themed-background-muted">
-                                                <i class="fa fa-ticket"></i>
-                                            </div>
-                                            <h4 class="text-left text-muted">
-                                                <strong>2</strong><br><small>Tickets</small>
-                                            </h4>
-                                        </div>
-                                    </a>
                                     <!-- END Quick Stats Content -->
                                 </div>
                                 <!-- END Quick Stats Block -->
@@ -219,7 +179,6 @@ include('./includes/header.php');
                                                 <td class="text-center" style="width: 70px;">
                                                     <div class="btn-group btn-group-xs">
                                                         <a href="page_ecom_order_view.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-xs btn-danger" data-original-title="Delete"><i class="fa fa-times"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -233,7 +192,6 @@ include('./includes/header.php');
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-xs">
                                                         <a href="page_ecom_order_view.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-xs btn-danger" data-original-title="Delete"><i class="fa fa-times"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -247,21 +205,6 @@ include('./includes/header.php');
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-xs">
                                                         <a href="page_ecom_order_view.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-xs btn-danger" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="page_ecom_order_view.html"><strong>ORD.685196</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">6 Products</a></td>
-                                                <td class="text-right hidden-xs"><strong>$264,00</strong></td>
-                                                <td><span class="label label-success">Delivered</span></td>
-                                                <td class="hidden-xs">Paypal</td>
-                                                <td class="hidden-xs text-center">27/01/2014</td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-xs">
-                                                        <a href="page_ecom_order_view.html" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="View"><i class="fa fa-eye"></i></a>
-                                                        <a href="javascript:void(0)" data-toggle="tooltip" title="" class="btn btn-xs btn-danger" data-original-title="Delete"><i class="fa fa-times"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -322,7 +265,7 @@ include('./includes/header.php');
                                 <div class="block">
                                     <!-- Customer Addresses Title -->
                                     <div class="block-title">
-                                        <h2><i class="fa fa-building-o"></i> <strong>Customer</strong> Addresses (2)</h2>
+                                        <h2><i class="fa fa-building-o"></i> <strong>Customer</strong> Addresses </h2>
                                     </div>
                                     <!-- END Customer Addresses Title -->
 
@@ -338,7 +281,7 @@ include('./includes/header.php');
                                                 <!-- END Billing Address Title -->
 
                                                 <!-- Billing Address Content -->
-                                                <h4><strong>Jonathan Taylor</strong></h4>
+                                                <h4><strong>Mohammed AL</strong></h4>
                                                 <address>
                                                     Sunset Str 620<br>
                                                     Melbourne<br>
@@ -350,69 +293,11 @@ include('./includes/header.php');
                                             </div>
                                             <!-- END Billing Address Block -->
                                         </div>
-                                        <div class="col-lg-6">
-                                            <!-- Shipping Address Block -->
-                                            <div class="block">
-                                                <!-- Shipping Address Title -->
-                                                <div class="block-title">
-                                                    <h2>Shipping Address</h2>
-                                                </div>
-                                                <!-- END Shipping Address Title -->
-
-                                                <!-- Shipping Address Content -->
-                                                <h4><strong>Harry Burke</strong></h4>
-                                                <address>
-                                                    Sunset Str 598<br>
-                                                    Melbourne<br>
-                                                    Australia, 21-852<br><br>
-                                                    <i class="fa fa-phone"></i> (999) 852-22222<br>
-                                                    <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">harry.burke@example.com</a>
-                                                </address>
-                                                <!-- END Shipping Address Content -->
-                                            </div>
-                                            <!-- END Shipping Address Block -->
-                                        </div>
                                     </div>
                                     <!-- END Customer Addresses Content -->
                                 </div>
                                 <!-- END Customer Addresses Block -->
 
-                                <!-- Referred Members Block -->
-                                <div class="block">
-                                    <!-- Referred Members Title -->
-                                    <div class="block-title">
-                                        <h2><i class="fa fa-group"></i> <strong>Referred</strong> Members (2)</h2>
-                                    </div>
-                                    <!-- END Referred Members Title -->
-
-                                    <!-- Referred Members Content -->
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <a href="javascript:void(0)" class="widget widget-hover-effect2 themed-background-muted-light">
-                                                <div class="widget-simple">
-                                                    <img src="img/placeholders/avatars/avatar12.jpg" alt="avatar" class="widget-image img-circle pull-left">
-                                                    <h4 class="widget-content text-right">
-                                                        <strong>Julia Warren</strong>
-                                                        <small>Orders Value: <strong>$280,00</strong></small>
-                                                    </h4>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <a href="javascript:void(0)" class="widget widget-hover-effect2 themed-background-muted-light">
-                                                <div class="widget-simple">
-                                                    <img src="img/placeholders/avatars/avatar2.jpg" alt="avatar" class="widget-image img-circle pull-left">
-                                                    <h4 class="widget-content text-right">
-                                                        <strong>Kyle Ross</strong>
-                                                        <small>Orders Value: <strong>$780,00</strong></small>
-                                                    </h4>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- END Referred Members Content -->
-                                </div>
-                                <!-- END Referred Members Block -->
 
                                 <!-- Private Notes Block -->
                                 <div class="block full">

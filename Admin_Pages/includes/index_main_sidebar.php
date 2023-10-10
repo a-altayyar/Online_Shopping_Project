@@ -60,7 +60,7 @@
                     <a href="page_ecom_products.php" <?= ($active == "products") ? "class=' active'" : "" ?>>Products</a>
                 </li>
                 <li>
-                    <a href="page_ecom_product_edit.php" <?= ($active == "product_edit") ? "class=' active'" : "" ?>>Product Edit</a>
+                    <a href="page_ecom_product_add.php" <?= ($active == "product_add") ? "class=' active'" : "" ?>>Product Add</a>
                 </li>
                 <li>
                     <a href="page_ecom_customer_view.php" <?= ($active == "customer_view") ? "class=' active'" : "" ?>>Customer View</a>

@@ -29,7 +29,7 @@
     <!-- END Left Header Navigation -->
 
     <!-- Search Form -->
-    <form action="page_ready_search_results.html" method="post" class="navbar-form-custom">
+    <form action="#" method="" class="navbar-form-custom">
         <div class="form-group">
             <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
         </div>
@@ -56,25 +56,25 @@
             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                 <li class="dropdown-header text-center">Account</li>
                 <li>
-                    <a href="page_ready_timeline.html">
+                    <a href="page_ready_timeline.php">
                         <i class="fa fa-clock-o fa-fw pull-right"></i>
                         <span class="badge pull-right">10</span>
                         Updates
                     </a>
-                    <a href="page_ready_inbox.html">
+                    <a href="page_ready_inbox.php">
                         <i class="fa fa-envelope-o fa-fw pull-right"></i>
                         <span class="badge pull-right">5</span>
                         Messages
                     </a>
 
-                    <a href="page_ready_faq.html"><i class="fa fa-question fa-fw pull-right"></i>
+                    <a href="page_ready_faq.php"><i class="fa fa-question fa-fw pull-right"></i>
                         <span class="badge pull-right">11</span>
                         FAQ
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="page_ready_user_profile.html">
+                    <a href="page_ready_user_profile.php">
                         <i class="fa fa-user fa-fw pull-right"></i>
                         Profile
                     </a>
