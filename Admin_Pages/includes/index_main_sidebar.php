@@ -63,6 +63,9 @@
                     <a href="page_ecom_product_add.php" <?= ($active == "product_add") ? "class=' active'" : "" ?>>Product Add</a>
                 </li>
                 <li>
+                    <a href="page_ecom_Categories_add.php" <?= ($active == "Categories_add") ? "class=' active'" : "" ?>>Categories View and Add</a>
+                </li>
+                <li>
                     <a href="page_ecom_customer_view.php" <?= ($active == "customer_view") ? "class=' active'" : "" ?>>Customer View</a>
                 </li>
                 <li class="sidebar-header">

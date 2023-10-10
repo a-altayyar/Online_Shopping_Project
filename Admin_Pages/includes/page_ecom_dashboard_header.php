@@ -15,6 +15,9 @@
         <li <?= ($act == "Product_Add") ? "class=' active'" : "" ?>>
             <a href="page_ecom_product_add.php"><i class="gi gi-inbox_plus"></i> Product Add</a>
         </li>
+        <li <?= ($act == "Categories_Add") ? "class=' active'" : "" ?>>
+            <a href="page_ecom_Categories_add.php"><i class="gi gi-inbox_plus"></i> Categories View and Add</a>
+        </li>
         <li <?= ($act == "Customer") ? "class=' active'" : "" ?>>
             <a href="page_ecom_customer_view.php"><i class="gi gi-user"></i> Customer View</a>
         </li>
