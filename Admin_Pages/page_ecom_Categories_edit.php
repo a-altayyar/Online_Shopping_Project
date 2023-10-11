@@ -5,6 +5,22 @@ include('./includes/header.php');
 
 <body>
     <?php
+    //Connect to DB
+    include './DB-CONFIG.php';
+    $con = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
+    if (!$con) {
+        echo mysqli_connect_errno();
+        exit;
+    }
+
+    //select the Categories ID
+    //edit.php?id=  => $_GET['id']
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $select = "SELECT * FROM Categories WHERE `Categories`.`Cate_ID` = " . $id . " LIMIT 1";
+    $result = mysqli_query($con, $select);
+    $row = mysqli_fetch_assoc($result);
+
+
     $error_fields = array();
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -13,20 +29,12 @@ include('./includes/header.php');
             $error_fields[] = "name";
         }
 
+        //Escape any sepcial characters to avoid SQL Injection
+        $name = mysqli_escape_string($con, $_POST['add_name']);
+
         if (!$error_fields) {
-            //Connect to DB
-            include './DB-CONFIG.php';
-            $con = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
-            if (!$con) {
-                echo mysqli_connect_errno();
-                exit;
-            }
-
-            //Escape any sepcial characters to avoid SQL Injection
-            $name = mysqli_escape_string($con, $_POST['add_name']);
-
-            //Insert the data
-            $query = "INSERT INTO `categories` (`Cate_Name`) VALUES ('$name');";
+            //Update the data
+            $query = "UPDATE `categories` SET `Cate_Name` = '" . $name . "' WHERE `categories`.`Cate_ID` = " . $id . ";";
             if (mysqli_query($con, $query)) {
                 header("Location: page_ecom_Categories_add.php");
                 exit;
@@ -34,14 +42,10 @@ include('./includes/header.php');
                 //echo $query;
                 echo mysqli_error($con);
             }
-
-
-
-
-
-            //Close the connection
-            mysqli_close($con);
         }
+
+        //Close the connection
+        mysqli_close($con);
     }
     ?>
 
@@ -96,19 +100,29 @@ include('./includes/header.php');
                             <div class="block">
                                 <!-- Categories Data Title -->
                                 <div class="block-title">
-                                    <h2><i class="fa fa-plus-square"></i> <strong><b style="color: #32cd32 ">Add New</b>
-                                            Categories</strong> Data</h2>
+                                    <h2><i class="fa fa-pencil"></i> <strong><b style="color: #ff0000  ">Edit
+                                            </b>Categories</strong> Data</h2>
                                 </div>
                                 <!-- END Categories Data Title -->
 
                                 <!-- Categories Data Content -->
                                 <form method="post" class="form-horizontal form-bordered">
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Categories
-                                            Name:</label><br>
+                                        <label class="col-md-3 control-label" for="Categories-title">Categories
+                                            ID:</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="add_name" value="" class="form-control"
-                                                placeholder="Name">
+                                            <strong>CID.
+                                            </strong>
+                                            <?= $row['Cate_ID'] ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="">Categories
+                                            Name</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="add_name"
+                                                value="<?= (isset($_POST['add_name'])) ? $_POST['add_name'] : $row['Cate_Name'] ?>"
+                                                class="form-control" placeholder="Name">
                                             <?php if (in_array("name", $error_fields))
                                                 echo "* Please enter your name"; ?>
                                         </div>
@@ -119,6 +133,8 @@ include('./includes/header.php');
                                                     class="fa fa-floppy-o"></i> Save</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i
                                                     class="fa fa-repeat"></i> Reset</button>
+                                            <input type="button" value="Cancel" class="btn btn-sm btn-danger"
+                                                onclick="alert('Action Cancel.\nClick OK to continue.'); window.location='page_ecom_Categories_add'" />
                                         </div>
                                     </div>
                                 </form>
@@ -126,6 +142,8 @@ include('./includes/header.php');
                             </div>
                             <!-- END Meta Data Block -->
                         </div>
+
+
                         <div class="col-lg-6">
                             <!-- All Categories Block -->
                             <div class="block full">
@@ -148,14 +166,13 @@ include('./includes/header.php');
                                     <tbody>
                                         <?php
                                         //Connect to MySQL
-                                        include './DB-CONFIG.php';
-                                        $con = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
-                                        if (!$con) {
+                                        $con2 = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
+                                        if (!$con2) {
                                             echo mysqli_connect_errno();
                                             exit;
                                         }
                                         $query_categories = "SELECT * FROM categories";
-                                        $result_categories = mysqli_query($con, $query_categories);
+                                        $result_categories = mysqli_query($con2, $query_categories);
                                         // this while loop to print all categories
                                         while ($row = mysqli_fetch_assoc($result_categories)) {
                                             ?>
@@ -185,7 +202,7 @@ include('./includes/header.php');
                                         mysqli_free_result($result_categories);
 
                                         // Close the connection
-                                        mysqli_close($con);
+                                        mysqli_close($con2);
                                         ?>
                                     </tbody>
                                 </table>
@@ -217,6 +234,7 @@ include('./includes/header.php');
     <?php include('./includes/footer.php'); ?>
 
     <!-- ================ footer Section end Here =============== -->
+
 
     <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
     <script src="js/helpers/ckeditor/ckeditor.js"></script>
