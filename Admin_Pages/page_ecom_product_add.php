@@ -4,6 +4,166 @@ include('./includes/header.php');
 ?>
 
 <body>
+    <?php
+    $error_fields = array();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+        // Validation "not empty and some value should be numeric"
+        if (!(isset($_POST['add_name']) && !empty($_POST['add_name']))) {
+            $error_fields[] = "Prod_name";
+        }
+        if (!(isset($_POST['add_category']) && !empty($_POST['add_category']))) {
+            $error_fields[] = "category";
+        }
+        if (!(isset($_POST['add_price']) && !empty($_POST['add_price']))) {
+            $error_fields[] = "price";
+        }
+        if (!is_numeric($_POST['add_price'])) { // not numeric
+            $error_fields[] = "price_not_no";
+        }
+        if (!(isset($_POST['add_warranty']) && !empty($_POST['add_warranty']))) {
+            $error_fields[] = "warranty";
+        }
+        if (!is_numeric($_POST['add_warranty'])) { // not numeric
+            $error_fields[] = "warranty_not_no";
+        }
+        if (!(isset($_POST['add_qty']) && !empty($_POST['add_qty']))) {
+            $error_fields[] = "qty";
+        }
+        if (!is_numeric($_POST['add_qty'])) { // not numeric
+            $error_fields[] = "qty_not_no";
+        }
+        if (!(isset($_POST['add_short_desc']) && !empty($_POST['add_short_desc']))) {
+            $error_fields[] = "short_desc";
+        }
+        if (!(isset($_POST['add_long_desc']) && !empty($_POST['add_long_desc']))) {
+            $error_fields[] = "long_desc";
+        }
+
+        // Setting Errors Array
+        $errors = array();
+
+        // **Setting Database File Name
+        $all_file = array();
+
+        // Get Info From The Form
+        $upload_img = $_FILES['add_img'];
+        $img_name = $upload_img['name'];
+        $img_type = $upload_img['type'];
+        $img_tmp = $upload_img['tmp_name'];
+        $img_size = $upload_img['size'];
+        $img_error = $upload_img['error'];
+
+        // Set allowed files Extensions
+        $allowed_extensions = array('jpg', 'gif', 'jpeg', 'png');
+
+        // Check file is uploaded
+        if ($img_error[0] == 4) // No File Uploaded
+            $error_fields[] = "empty";
+
+
+
+
+
+        //Connect to DB
+        if (!$error_fields) {
+            include './DB-CONFIG.php';
+            $con = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
+            if (!$con) {
+                echo mysqli_connect_errno();
+                exit;
+            }
+
+
+            //Escape any sepcial characters to avoid SQL Injection
+            $Prod_name = mysqli_escape_string($con, $_POST['add_name']);
+            $add_category = mysqli_escape_string($con, $_POST['add_category']);
+            $add_price = mysqli_escape_string($con, $_POST['add_price']);
+            $add_warranty = mysqli_escape_string($con, $_POST['add_warranty']);
+            $add_status = mysqli_escape_string($con, $_POST['add_qty']);
+            $add_public = mysqli_escape_string($con, $_POST['add_public']);
+            $add_short_desc = mysqli_escape_string($con, $_POST['add_short_desc']);
+            $add_long_desc = mysqli_escape_string($con, $_POST['add_long_desc']);
+            $add_below_desc = mysqli_escape_string($con, $_POST['add_below_desc']);
+
+            // If you want to publish the product or not
+            if (!empty($_POST['add_public'])) // Display
+                $add_public = 1;
+            else // Hidden
+                $add_public = 0;
+
+
+            $files_count = count($img_name);
+
+            for ($i = 0; $i < $files_count; $i++) {
+
+                // Setting Errors Array
+                $errors = array();
+
+                //Get files Extension
+                $explode_file = explode('.', $img_name[$i]);
+                $image_extension[$i] = strtolower(end($explode_file));
+
+                // Get Random Name For File
+                $img_random[$i] = rand(0, 10000000000) . '.' . $image_extension[$i];
+
+                // Check fils size
+                if ($img_size[$i] > 999999999):
+                    $errors[] = "file_size";
+                endif;
+                // Check if File is valid
+                if (!in_array($image_extension[$i], $allowed_extensions)):
+                    $errors[] = "not_valid";
+                endif;
+
+                // Check If Has No Errors
+                if (empty($errors)):
+
+                    // Move The Files
+                    $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '\My_Projects\OunProject1\EgoStore_Main_HTML_Template\Store\assets\images\product\tmp\\';
+                    move_uploaded_file($img_tmp[$i], "$uploads_dir/$img_name[$i]" . "$img_random[$i]");
+
+                    // **if You Want To Upload These Accepted Files
+                    $all_file[] = $img_name[$i] . $img_random[$i];
+
+                else:
+
+                    // <--  error can't print fix this  -->
+                    echo '<div style="background-color: #EEE; padding: 10px; margin-bottom: 20px">';
+                    echo 'File Number: ' . ($i + 1) . '<br>';
+                    echo 'File Name: ' . $img_name[$i] . '<br>';
+                    foreach ($errors as $error):
+
+                        echo $error;
+
+                    endforeach;
+                    echo '</div>';
+
+                endif;
+            }
+
+            $file_field = implode(',', $all_file);
+
+            //Insert the data
+            $query = "INSERT INTO `product` (`Prod_ID`, `FK_Cate_ID`, `Prod_Name`, `Prod_Published`, `Prod_Long_Desc`, `Prod_Short_Desc`, `Prod_Below_Desc`, `Prod_Price`, `Prod_Stock_Status`, `Prod_Warranty`,`Prod_Img`, `Prod_Date_Added`) 
+                                    VALUES (NULL, '$add_category', '$Prod_name', '$add_public' , '$add_long_desc', '$add_short_desc', '$add_below_desc', '$add_price', '$add_status', '$add_warranty', '$file_field', CURRENT_TIMESTAMP);";
+            if (mysqli_query($con, $query)) {
+                header("Location: page_ecom_product_add.php");
+                exit(0);
+            } else {
+                //echo $query;
+                echo mysqli_error($con);
+            }
+
+            //Close the connection
+            mysqli_close($con);
+
+        }
+    }
+
+    ?>
+
 
     <div id="page-wrapper">
 
@@ -48,190 +208,191 @@ include('./includes/header.php');
                     <!-- END eCommerce Product Add Header -->
 
                     <!-- Product add Content -->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- General Data Block -->
-                            <div class="block">
-                                <!-- General Data Title -->
-                                <div class="block-title">
-                                    <h2><i class="fa fa-pencil"></i> <strong>General</strong> Data</h2>
-                                </div>
-                                <!-- END General Data Title -->
-
-                                <!-- General Data Content -->
-                                <form action="page_ecom_product_edit.html" method="post"
-                                    class="form-horizontal form-bordered" onsubmit="return false;">
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-id">PID</label>
-                                        <div class="col-md-9">
-                                            <input type="text" id="product-id" name="product-id" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-name">Name</label>
-                                        <div class="col-md-9">
-                                            <input type="text" id="product-name" name="product-name"
-                                                class="form-control" placeholder="Enter product name..">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label"
-                                            for="product-description">Description</label>
-                                        <div class="col-md-9">
-                                            <textarea id="product-description" name="product-description"
-                                                class="ckeditor"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-short-description">Short
-                                            Description</label>
-                                        <div class="col-md-9">
-                                            <textarea id="product-short-description" name="product-short-description"
-                                                class="form-control" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-category">Category</label>
-                                        <div class="col-md-8">
-                                            <select id="product-category" name="product-category" class="select-chosen"
-                                                data-placeholder="Choose Category.." style="width: 250px;">
-                                                <option></option>
-                                                <!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                                <option value="1">Tablets</option>
-                                                <option value="2">Laptops</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-price">Price</label>
-                                        <div class="col-md-8">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                                <input type="text" id="product-price" name="product-price"
-                                                    class="form-control" placeholder="0,00">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Sock Status</label>
-                                        <div class="col-md-9">
-                                            <label class="radio-inline" for="product-condition-new">
-                                                <input type="radio" id="product-condition-new" name="product-condition"
-                                                    value="condition_new" checked> Available
-                                            </label>
-                                            <label class="radio-inline" for="product-condition-used">
-                                                <input type="radio" id="product-condition-used" name="product-condition"
-                                                    value="condition_used"> Out of Stock
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Published?</label>
-                                        <div class="col-md-9">
-                                            <label class="switch switch-primary">
-                                                <input type="checkbox" id="product-status" name="product-status"
-                                                    checked><span></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-3">
-                                            <button type="submit" class="btn btn-sm btn-primary"><i
-                                                    class="fa fa-floppy-o"></i> Save</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i
-                                                    class="fa fa-repeat"></i> Reset</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- END General Data Content -->
-                            </div>
-                            <!-- END General Data Block -->
+                    <div class="block full">
+                        <!-- General Data Block -->
+                        <!-- General Data Title -->
+                        <div class="block-title">
+                            <h2><i class="fa fa-pencil"></i> <strong><b style="color: #32cd32 ">Add New</b>
+                                    General</strong> Data</h2>
                         </div>
-                        <div class="col-lg-6">
-                            <!-- Meta Data Block -->
-                            <div class="block">
-                                <!-- Meta Data Title -->
-                                <div class="block-title">
-                                    <h2><i class="fa fa-google"></i> <strong>Meta</strong> Data</h2>
-                                </div>
-                                <!-- END Meta Data Title -->
+                        <!-- END General Data Title -->
 
-                                <!-- Meta Data Content -->
-                                <form action="page_ecom_product_edit.html" method="post"
-                                    class="form-horizontal form-bordered" onsubmit="return false;">
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-meta-title">Meta
-                                            Title</label>
-                                        <div class="col-md-9">
-                                            <input type="text" id="product-meta-title" name="product-meta-title"
-                                                class="form-control" placeholder="Enter meta title..">
-                                            <div class="help-block">55 Characters Max</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-meta-keywords">Meta
-                                            Keywords</label>
-                                        <div class="col-md-9">
-                                            <input type="text" id="product-meta-keywords" name="product-meta-keywords"
-                                                class="form-control" placeholder="keyword1, keyword2, keyword3">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="product-meta-description">Meta
-                                            Description</label>
-                                        <div class="col-md-9">
-                                            <textarea id="product-meta-description" name="product-meta-description"
-                                                class="form-control" rows="6"
-                                                placeholder="Enter meta description.."></textarea>
-                                            <div class="help-block">115 Characters Max</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-3">
-                                            <button type="submit" class="btn btn-sm btn-primary"><i
-                                                    class="fa fa-floppy-o"></i> Save</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i
-                                                    class="fa fa-repeat"></i> Reset</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- END Meta Data Content -->
+                        <!-- General Data Content -->
+                        <form action="#" id="formtwo" method="post" enctype="multipart/form-data"
+                            class="form-horizontal form-bordered">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Name</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="add_name"
+                                        value="<?= (isset($_POST['add_name'])) ? $_POST['add_name'] : '' ?>"
+                                        class="form-control" placeholder="Enter product name..">
+                                    <?php if (in_array("Prod_name", $error_fields))
+                                        echo "* Please Enter Product Name"; ?>
+                                </div>
                             </div>
-                            <!-- END Meta Data Block -->
 
-                            <!-- Product Images Block -->
-                            <div class="block">
-                                <!-- Product Images Title -->
-                                <div class="block-title">
-                                    <h2><i class="fa fa-picture-o"></i> <strong>Product</strong> Images</h2>
+                            <?php
+                            //Connect to MySQL
+                            include './DB-CONFIG.php';
+                            $con_2 = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
+                            if (!$con_2) {
+                                echo mysqli_connect_errno();
+                                exit;
+                            }
+                            // this query to display all categories on option tag
+                            $query_categories = "SELECT * FROM categories";
+                            $result_categories = mysqli_query($con_2, $query_categories);
+                            ?>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Category</label>
+                                <div class="col-md-8">
+                                    <select name="add_category" class="select-chosen"
+                                        data-placeholder="Choose Category.." style="width: 250px;">
+                                        <?php while ($row = mysqli_fetch_assoc($result_categories)) { ?>
+                                            <option value="<?= $row['Cate_ID'] ?>">
+                                                <?= $row['Cate_Name'] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php if (in_array("category", $error_fields))
+                                        echo "* Please Chose The Category"; ?>
                                 </div>
-                                <!-- END Product Images Title -->
-
-                                <!-- Product Images Content -->
-                                <div class="block-section">
-                                    <form action="#" class="dropzone"></form>
-                                </div>
-                                <table class="table table-bordered table-striped table-vcenter">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 20%;">
-                                                <a href="img/placeholders/photos/photo11.jpg"
-                                                    data-toggle="lightbox-image">
-                                                    <img src="img/placeholders/photos/photo11.jpg" alt=""
-                                                        class="img-responsive center-block" style="max-width: 110px;">
-                                                </a>
-                                            </td>
-                                            <td class="text-center">
-                                                <a href="javascript:void(0)" class="btn btn-xs btn-danger"><i
-                                                        class="fa fa-trash-o"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- END Product Images Content -->
                             </div>
-                            <!-- END Product Images Block -->
-                        </div>
+                            <?php
+                            mysqli_free_result($result_categories);
+
+                            //Close the connection
+                            mysqli_close($con_2);
+                            ?>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Price</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                                        <input type="text" name="add_price"
+                                            value="<?= (isset($_POST['add_price'])) ? $_POST['add_price'] : '' ?>"
+                                            class="form-control" placeholder="0,00">
+                                        <?php
+                                        if (in_array("price", $error_fields))
+                                            echo "* Please Enter Price";
+                                        elseif (in_array("price_not_no", $error_fields))
+                                            echo "* Should be Number";
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Warranty</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Month</div>
+                                        <input type="text" name="add_warranty"
+                                            value="<?= (isset($_POST['add_warranty'])) ? $_POST['add_warranty'] : '' ?>"
+                                            class="form-control" placeholder="Enter number of Month">
+                                        <?php
+                                        if (in_array("warranty", $error_fields))
+                                            echo "* Please Enter warranty month";
+                                        elseif (in_array("warranty_not_no", $error_fields))
+                                            echo "* Should be Number";
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Quantity</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">QTY</div>
+                                        <input type="text" name="add_qty"
+                                            value="<?= (isset($_POST['add_qty'])) ? $_POST['add_qty'] : '' ?>"
+                                            class="form-control" placeholder="Enter Number of QTY">
+                                        <?php
+                                        if (in_array("qty", $error_fields))
+                                            echo "* Please Enter Number of QTY";
+                                        elseif (in_array("qty_not_no", $error_fields))
+                                            echo "* Should be Number";
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Published?</label>
+                                <div class="col-md-9">
+                                    <label class="switch switch-primary">
+                                        <input type="checkbox" name="add_public" checked><span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Short
+                                    Description</label>
+                                <div class="col-md-9">
+                                    <textarea name="add_short_desc" class="form-control"
+                                        rows="3"><?= (isset($_POST['add_short_desc'])) ? $_POST['add_short_desc'] : '' ?></textarea>
+                                    <?php if (in_array("short_desc", $error_fields))
+                                        echo "* Please Enter Short Desc"; ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Description</label>
+                                <div class="col-md-9">
+                                    <textarea name="add_long_desc"
+                                        class="ckeditor"><?= (isset($_POST['add_long_desc'])) ? $_POST['add_long_desc'] : '' ?></textarea>
+                                    <?php if (in_array("long_desc", $error_fields))
+                                        echo "* Please Enter Long Desc"; ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Below Description</label>
+                                <div class="col-md-9">
+                                    <textarea name="add_below_desc"
+                                        class="ckeditor"><?= (isset($_POST['add_below_desc'])) ? $_POST['add_below_desc'] : '' ?></textarea>
+                                    <?php if (in_array("below_desc", $error_fields))
+                                        echo "* Please Enter Long Desc"; ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Upload File: </label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="btn btn-default btn-file">
+                                            <input type="file" name="add_img[]" class="file" multiple="multiple"
+                                                data-show-upload="false" data-show-caption="true">
+                                        </span>
+                                    </div>
+                                    <?php if (in_array("empty", $error_fields)) {
+                                        echo "* No File Uploaded!";
+                                    } else {
+                                        if (in_array("file_size", $error_fields)) {
+                                            echo "* Please enter a file size not bigger then 6MB";
+                                        }
+                                        if (in_array("not_valid", $error_fields)) {
+                                            echo "* File is Not Valid";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div><br>
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i>
+                                        Save</button>
+                                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i>
+                                        Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END General Data Content -->
                     </div>
                     <!-- END Product add Content -->
                 </div>
