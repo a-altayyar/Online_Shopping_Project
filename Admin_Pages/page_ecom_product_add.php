@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!isset($_SESSION['A_ID']))
+    header("Location: login.php");
+
 $title = "sum";
 include('./includes/header.php');
 ?>
