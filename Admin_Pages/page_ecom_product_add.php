@@ -32,7 +32,7 @@ include('./includes/header.php');
         if (!is_numeric($_POST['add_warranty'])) { // not numeric
             $error_fields[] = "warranty_not_no";
         }
-        if (!(isset($_POST['add_qty']) && !empty($_POST['add_qty']))) {
+        if (!($_POST['add_qty'] >= 0)) {
             $error_fields[] = "qty";
         }
         if (!is_numeric($_POST['add_qty'])) { // not numeric
@@ -67,9 +67,6 @@ include('./includes/header.php');
             $error_fields[] = "empty";
 
 
-
-
-
         //Connect to DB
         if (!$error_fields) {
             include './DB-CONFIG.php';
@@ -85,21 +82,22 @@ include('./includes/header.php');
             $add_category = mysqli_escape_string($con, $_POST['add_category']);
             $add_price = mysqli_escape_string($con, $_POST['add_price']);
             $add_warranty = mysqli_escape_string($con, $_POST['add_warranty']);
-            $add_status = mysqli_escape_string($con, $_POST['add_qty']);
+            $add_qty = mysqli_escape_string($con, $_POST['add_qty']);
             $add_public = mysqli_escape_string($con, $_POST['add_public']);
             $add_short_desc = mysqli_escape_string($con, $_POST['add_short_desc']);
             $add_long_desc = mysqli_escape_string($con, $_POST['add_long_desc']);
             $add_below_desc = mysqli_escape_string($con, $_POST['add_below_desc']);
+            $Admin_ID = $_SESSION['A_ID'];
 
             // If you want to publish the product or not
-            if (!empty($_POST['add_public'])) // Display
+            if (!empty($_POST['add_public'])): // Display
                 $add_public = 1;
-            else // Hidden
+            else: // Hidden
                 $add_public = 0;
+            endif;
 
-
+            // Start Upload The Images
             $files_count = count($img_name);
-
             for ($i = 0; $i < $files_count; $i++) {
 
                 // Setting Errors Array
@@ -125,7 +123,7 @@ include('./includes/header.php');
                 if (empty($errors)):
 
                     // Move The Files
-                    $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '\My_Projects\OunProject1\EgoStore_Main_HTML_Template\Store\assets\images\product\tmp\\';
+                    $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '\My_Projects\OunProject1\EgoStore_Main_HTML_Template\Store\assets\images\product\\';
                     move_uploaded_file($img_tmp[$i], "$uploads_dir/$img_name[$i]" . "$img_random[$i]");
 
                     // **if You Want To Upload These Accepted Files
@@ -146,17 +144,17 @@ include('./includes/header.php');
 
                 endif;
             }
-
-            $file_field = implode(',', $all_file);
+            $img_field = implode(',', $all_file);
+            // End Upload Images in implode Array.
+    
 
             //Insert the data
-            $query = "INSERT INTO `product` (`Prod_ID`, `FK_Cate_ID`, `Prod_Name`, `Prod_Published`, `Prod_Long_Desc`, `Prod_Short_Desc`, `Prod_Below_Desc`, `Prod_Price`, `Prod_Stock_Status`, `Prod_Warranty`,`Prod_Img`, `Prod_Date_Added`) 
-                                    VALUES (NULL, '$add_category', '$Prod_name', '$add_public' , '$add_long_desc', '$add_short_desc', '$add_below_desc', '$add_price', '$add_status', '$add_warranty', '$file_field', CURRENT_TIMESTAMP);";
+            $query = "INSERT INTO `product` (`Prod_ID`, `FK_Cate_ID`, `Prod_Name`, `Prod_Published`, `Prod_Long_Desc`, `Prod_Short_Desc`, `Prod_Below_Desc`, `Prod_Price`, `Prod_Stock_Status`, `Prod_Warranty`,`Prod_Img`, `FK_Admin_ID`, `Prod_Date_Added`) 
+                                    VALUES (NULL, '$add_category', '$Prod_name', '$add_public' , '$add_long_desc', '$add_short_desc', '$add_below_desc', '$add_price', '$add_qty', '$add_warranty', '$img_field', '$Admin_ID', CURRENT_TIMESTAMP);";
             if (mysqli_query($con, $query)) {
                 header("Location: page_ecom_product_add.php");
                 exit(0);
             } else {
-                //echo $query;
                 echo mysqli_error($con);
             }
 
@@ -216,8 +214,8 @@ include('./includes/header.php');
                         <!-- General Data Block -->
                         <!-- General Data Title -->
                         <div class="block-title">
-                            <h2><i class="fa fa-pencil"></i> <strong><b style="color: #32cd32 ">Add New</b>
-                                    General</strong> Data</h2>
+                            <h2><i class="fa fa-plus-square"></i> <strong><b style="color: #32cd32 ">Add New</b>
+                                    Product</strong> Data</h2>
                         </div>
                         <!-- END General Data Title -->
 
@@ -232,7 +230,7 @@ include('./includes/header.php');
                                         value="<?= (isset($_POST['add_name'])) ? $_POST['add_name'] : '' ?>"
                                         class="form-control" placeholder="Enter product name..">
                                     <?php if (in_array("Prod_name", $error_fields))
-                                        echo "* Please Enter Product Name"; ?>
+                                        echo "<div class='alert alert-danger'> * Please Enter Product Name</div>"; ?>
                                 </div>
                             </div>
 
@@ -260,7 +258,7 @@ include('./includes/header.php');
                                         <?php } ?>
                                     </select>
                                     <?php if (in_array("category", $error_fields))
-                                        echo "* Please Chose The Category"; ?>
+                                        echo "<div class='text-danger'> * Please Chose The Category </div>"; ?>
                                 </div>
                             </div>
                             <?php
@@ -280,9 +278,9 @@ include('./includes/header.php');
                                             class="form-control" placeholder="0,00">
                                         <?php
                                         if (in_array("price", $error_fields))
-                                            echo "* Please Enter Price";
+                                            echo "<div class='text-danger'> * Please Enter Price </div>";
                                         elseif (in_array("price_not_no", $error_fields))
-                                            echo "* Should be Number";
+                                            echo "<div class='text-danger'> * Should be Number </div>";
                                         ?>
                                     </div>
                                 </div>
@@ -298,9 +296,9 @@ include('./includes/header.php');
                                             class="form-control" placeholder="Enter number of Month">
                                         <?php
                                         if (in_array("warranty", $error_fields))
-                                            echo "* Please Enter warranty month";
+                                            echo "<div class='text-danger'> * Please Enter The Number of Months Warranty </div>";
                                         elseif (in_array("warranty_not_no", $error_fields))
-                                            echo "* Should be Number";
+                                            echo "<div class='text-danger'> * Should be Number </div>";
                                         ?>
                                     </div>
                                 </div>
@@ -316,9 +314,9 @@ include('./includes/header.php');
                                             class="form-control" placeholder="Enter Number of QTY">
                                         <?php
                                         if (in_array("qty", $error_fields))
-                                            echo "* Please Enter Number of QTY";
+                                            echo "<div class='text-danger'> * Please Enter Number of QTY </div>";
                                         elseif (in_array("qty_not_no", $error_fields))
-                                            echo "* Should be Number";
+                                            echo "<div class='text-danger'> * Should be Number </div>";
                                         ?>
                                     </div>
                                 </div>
@@ -328,7 +326,7 @@ include('./includes/header.php');
                                 <label class="col-md-3 control-label">Published?</label>
                                 <div class="col-md-9">
                                     <label class="switch switch-primary">
-                                        <input type="checkbox" name="add_public" checked><span></span>
+                                        <input type="checkbox" name="add_public" <?= (isset($_POST['add_public'])) ? 'checked' : '' ?>><span></span>
                                     </label>
                                 </div>
                             </div>
@@ -340,7 +338,7 @@ include('./includes/header.php');
                                     <textarea name="add_short_desc" class="form-control"
                                         rows="3"><?= (isset($_POST['add_short_desc'])) ? $_POST['add_short_desc'] : '' ?></textarea>
                                     <?php if (in_array("short_desc", $error_fields))
-                                        echo "* Please Enter Short Desc"; ?>
+                                        echo "<div class='text-danger'> * Please Enter Short Desc </div>"; ?>
                                 </div>
                             </div>
 
@@ -350,7 +348,7 @@ include('./includes/header.php');
                                     <textarea name="add_long_desc"
                                         class="ckeditor"><?= (isset($_POST['add_long_desc'])) ? $_POST['add_long_desc'] : '' ?></textarea>
                                     <?php if (in_array("long_desc", $error_fields))
-                                        echo "* Please Enter Long Desc"; ?>
+                                        echo "<div class='text-danger'> * Please Enter Long Desc </div>"; ?>
                                 </div>
                             </div>
 
@@ -359,8 +357,6 @@ include('./includes/header.php');
                                 <div class="col-md-9">
                                     <textarea name="add_below_desc"
                                         class="ckeditor"><?= (isset($_POST['add_below_desc'])) ? $_POST['add_below_desc'] : '' ?></textarea>
-                                    <?php if (in_array("below_desc", $error_fields))
-                                        echo "* Please Enter Long Desc"; ?>
                                 </div>
                             </div>
 
@@ -374,13 +370,13 @@ include('./includes/header.php');
                                         </span>
                                     </div>
                                     <?php if (in_array("empty", $error_fields)) {
-                                        echo "* No File Uploaded!";
+                                        echo "<div class='text-danger'> * No File Uploaded! </div>";
                                     } else {
                                         if (in_array("file_size", $error_fields)) {
-                                            echo "* Please enter a file size not bigger then 6MB";
+                                            echo "<div class='text-danger'> * Please enter a file size not bigger then 6MB </div>";
                                         }
                                         if (in_array("not_valid", $error_fields)) {
-                                            echo "* File is Not Valid";
+                                            echo "<div class='text-danger'> * File is Not Valid </div>";
                                         }
                                     }
                                     ?>

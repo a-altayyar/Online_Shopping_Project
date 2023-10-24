@@ -55,36 +55,43 @@ include('./includes/header.php');
                     exit;
                 }
 
+                /*this query to return the Count of row.
+                for <!-- Quick Stats --> */
+                $query_Product_all = "SELECT `Prod_ID` FROM product";
+                $result_all_Product = mysqli_query($con, $query_Product_all);
 
-                $query_Product = "SELECT * FROM product";
-
-
-                /*this query and if condition 
-                for <!-- Quick Stats --> to filter the result */
-                $result_all_Product = mysqli_query($con, $query_Product);
-
-                $query_Product_out = "SELECT * FROM `product` WHERE `Prod_Stock_Status` = 0;";
+                $query_Product_out = "SELECT `Prod_ID` FROM `product` WHERE `Prod_Stock_Status` = 0;";
                 $result_Product_out = mysqli_query($con, $query_Product_out);
 
-                $query_Product_available = "SELECT * FROM `product` WHERE `Prod_Stock_Status` > 0;";
+                $query_Product_available = "SELECT `Prod_ID` FROM `product` WHERE `Prod_Stock_Status` > 0;";
                 $result_Product_available = mysqli_query($con, $query_Product_available);
 
-                if (isset($_POST['out_of_stock'])) {
-                    $query_Product = "SELECT * FROM `product` WHERE `Prod_Stock_Status` = 0;";
-                } elseif (isset($_POST['product_available'])) {
-                    $query_Product = "SELECT * FROM `product` WHERE `Prod_Stock_Status` > 0;";
-                }
+
+
+                $join_query = "SELECT `Prod_ID`, `Prod_Name`, `FK_Cate_ID`, categories.Cate_Name, `Prod_Published`, `Prod_Price`, `Prod_Stock_Status`, `Prod_Warranty`, `Prod_Date_Added` 
+                            FROM `product` join `categories` ON product.FK_Cate_ID = categories.Cate_ID ";
+                $query_Product = $join_query;
+
+
+                /*this if condition to change the query
+                for <!-- Quick Stats --> to filter the result */
+                if (isset($_POST['all_product']))
+                    $query_Product = $join_query;
+
+                if (isset($_POST['out_of_stock']))
+                    $query_Product = $join_query . " WHERE `Prod_Stock_Status` = 0;";
+
+                if (isset($_POST['product_available']))
+                    $query_Product = $join_query . " WHERE `Prod_Stock_Status` > 0;";
+
                 $result_Product = mysqli_query($con, $query_Product);
-
-
-
 
 
                 ?>
 
                 <!-- Quick Stats -->
                 <div class="row text-center">
-                    <form action="" method="post">
+                    <form action="#" method="post">
                         <div class="col-sm-6 col-lg-3">
                             <a href="page_ecom_product_add.php" class="widget widget-hover-effect2">
                                 <div class="widget-extra themed-background-success">
@@ -154,10 +161,12 @@ include('./includes/header.php');
                     <table id="ecom-products" class="table table-bordered table-striped table-vcenter">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th class="text-center" style="width: 70px;">ID</th>
                                 <th class="hidden-xs">Product Name</th>
+                                <th class="hidden-xs">Category Name</th>
                                 <th class="hidden-xs">Status</th>
-                                <th class="text-right hidden-xs">Price</th>
+                                <th class="hidden-xs">Price</th>
                                 <th class="hidden-xs">Warranty</th>
                                 <th class="hidden-xs">Published?</th>
                                 <th class="hidden-xs">More Details</th>
@@ -167,15 +176,25 @@ include('./includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                            // this while loop to print all categories 
+                            // this while loop to print all Product
+                            $i = 0;
                             while ($row = mysqli_fetch_assoc($result_Product)) {
+                                $i++;
                                 ?>
                                 <tr>
-                                    <td class="text-center"><a href="#"><strong>PID.
+                                    <td class="text-center">
+                                        <?= $i ?>
+                                    </td>
+                                    <td class="text-center"><a
+                                            href="page_ecom_product_more.php?id=<?= $row['Prod_ID'] ?>"><strong>PID.
                                                 <?= $row['Prod_ID'] ?>
                                             </strong></a></td>
-                                    <td><a href="#">
+                                    <td><a href="page_ecom_product_more.php?id=<?= $row['Prod_ID'] ?>">
                                             <?= $row['Prod_Name'] ?>
+                                        </a>
+                                    </td>
+                                    <td><a href="page_ecom_Categories_edit.php?id=<?= $row['FK_Cate_ID'] ?>">
+                                            <?= $row['Cate_Name'] ?>
                                         </a>
                                     </td>
                                     <td class="text-center hidden-xs">
@@ -184,8 +203,8 @@ include('./includes/header.php');
                                             <?= ($row['Prod_Stock_Status'] > 0) ? "Available (" . $row['Prod_Stock_Status'] . ")" : "Out of Stock" ?>
                                         </span>
                                     </td>
-                                    <td class="text-center hidden-xs"><strong>$
-                                            <?= $row['Prod_Price'] ?>
+                                    <td class="text-center hidden-xs"><strong>
+                                            <?= $row['Prod_Price'] ?> SAR
                                         </strong>
                                     </td>
                                     <td class="text-center hidden-xs"><strong>
@@ -199,7 +218,7 @@ include('./includes/header.php');
                                         </span>
                                     </td>
                                     <td class="text-center hidden-xs"><strong>
-                                            <a href="#">More..</a>
+                                            <a href="page_ecom_product_more.php?id=<?= $row['Prod_ID'] ?>">More..</a>
                                         </strong>
                                     </td>
                                     <td class="hidden-xs text-center">
@@ -207,10 +226,14 @@ include('./includes/header.php');
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group btn-group-xs">
-                                            <a href="#" data-toggle="tooltip" title="Edit"
-                                                class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" data-toggle="tooltip" title="Delete"
-                                                class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                            <a href="page_ecom_product_edit.php?id=<?= $row['Prod_ID'] ?>"
+                                                data-toggle="tooltip" title="Edit" class="btn btn-default"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            <button type="button" data-toggle="tooltip" title="Delete"
+                                                class="btn btn-xs btn-danger"
+                                                onclick="DeleteOrNot(<?= $row['Prod_ID'] ?>)"><i
+                                                    class="fa fa-times"></i></button>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -253,6 +276,13 @@ include('./includes/header.php');
 
     <!-- ================ footer Section end Here =============== -->
 
+    <!-- Sends a notification that enables you to complete the deletion or cancellation process  -->
+    <script>
+        function DeleteOrNot(ID) {
+            if (confirm('Action DELETE.\nClick OK to continue.'))
+                window.location = 'page_ecom_product_delete.php?id=' + ID;
+        }
+    </script>
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="js/pages/ecomProducts.js"></script>
