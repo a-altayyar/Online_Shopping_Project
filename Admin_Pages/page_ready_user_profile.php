@@ -1,6 +1,14 @@
-<?php 
-$title ="sum";
-include('./includes/header.php'); 
+<?php
+session_start();
+
+// Make sure you are logged in 
+include('./includes/logged_in.php');
+?>
+
+
+<?php
+$title = "sum";
+include('./includes/header.php');
 ?>
 
     <body>
@@ -22,8 +30,8 @@ include('./includes/header.php');
 
 
                 <!-- Main Sidebar -->
-                <?php 
-                $active= "user_profile"; 
+                <?php
+                $active= "user_profile";
                 include('./includes/index_main_sidebar.php');
                 ?>
                 <!-- END Main Sidebar -->
@@ -571,7 +579,7 @@ include('./includes/header.php');
         </div>
         <!-- END Page Wrapper -->
 
-	<!-- ================ footer Section start Here =============== -->
+    <!-- ================ footer Section start Here =============== -->
   
     <?php include('./includes/footer.php'); ?>
 

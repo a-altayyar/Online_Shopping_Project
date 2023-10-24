@@ -1,13 +1,17 @@
 <?php
+session_start();
+
+// Make sure you are logged in 
+include('./includes/logged_in.php');
+?>
+
+<?php
 $title = "sum";
 include('./includes/header.php');
 ?>
 
 <body>
     <?php
-    session_start();
-    if (!isset($_SESSION['A_ID']))
-        header("Location: login.php");
 
     $error_fields = array();
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

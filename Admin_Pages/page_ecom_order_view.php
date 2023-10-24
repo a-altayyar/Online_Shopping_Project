@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+// Make sure you are logged in 
+include('./includes/logged_in.php');
+?>
+
+<?php
 $title = "sum";
 include('./includes/header.php');
 ?>

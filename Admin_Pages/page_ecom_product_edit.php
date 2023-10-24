@@ -1,11 +1,17 @@
 <?php
+session_start();
+
+// Make sure you are logged in 
+include('./includes/logged_in.php');
+?>
+
+<?php
 $title = "sum";
 include('./includes/header.php');
 ?>
 
 <body>
     <?php
-    session_start();
     //Connect to DB
     include './DB-CONFIG.php';
     $con = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
