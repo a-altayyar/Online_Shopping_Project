@@ -16,7 +16,9 @@ include('./includes/header.php');
     //select the Categories ID
     //edit.php?id=  => $_GET['id']
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-    $select = "SELECT * FROM Categories WHERE `Categories`.`Cate_ID` = " . $id . " LIMIT 1";
+    $select = "SELECT `Cate_ID`, `Cate_Name`, `FK_Admin_ID`, `Cate_Date`, admin_list.Admin_FName, admin_list.Admin_LName FROM `categories`, `admin_list` WHERE categories.FK_Admin_ID = admin_list.Admin_ID AND `Categories`.`Cate_ID` = " . $id . " LIMIT 1";
+    $query_categories = "SELECT  
+                            FROM `categories`, `admin_list` WHERE  LIMIT 1;";
     $result = mysqli_query($con, $select);
     $row = mysqli_fetch_assoc($result);
 
@@ -68,7 +70,7 @@ include('./includes/header.php');
 
             <!-- Main Sidebar -->
             <?php
-            $active = "Categories_add";
+            $active = "NULL";
             include('./includes/index_main_sidebar.php');
             ?>
             <!-- END Main Sidebar -->
@@ -85,12 +87,13 @@ include('./includes/header.php');
 
                 <!-- Page content -->
                 <div id="page-content">
-                    <!-- eCommerce Categories Add Header -->
-                    <?php
-                    $act = "Categories_Add";
-                    include('./includes/page_ecom_dashboard_header.php');
-                    ?>
-                    <!-- END eCommerce Categories Add Header -->
+                    <!-- Quick Stats -->
+                    <div class="row text-left">
+                        <a href="page_ecom_Categories_add.php" class="btn btn-alt btn-lg btn-default"><i
+                                class="gi gi-chevron-left"></i><strong> Categories</strong> List</a><br><br>
+
+                    </div>
+                    <!-- END Quick Stats -->
 
                     <!-- Categories add Content -->
                     <div class="row">
@@ -134,7 +137,7 @@ include('./includes/header.php');
                                             <button type="reset" class="btn btn-sm btn-warning"><i
                                                     class="fa fa-repeat"></i> Reset</button>
                                             <input type="button" value="Cancel" class="btn btn-sm btn-danger"
-                                                onclick="alert('Action Cancel.\nClick OK to continue.'); window.location='page_ecom_Categories_add'" />
+                                                onclick="if(confirm('Action Cancel.\nClick OK to continue.')) window.location='page_ecom_Categories_add';" />
                                         </div>
                                     </div>
                                 </form>
@@ -159,51 +162,38 @@ include('./includes/header.php');
                                         <tr>
                                             <th class="text-center" style="width: 70px;">ID</th>
                                             <th>Categories Name</th>
+                                            <th class="hidden-xs text-center">Add By</th>
                                             <th class="hidden-xs text-center">Added</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        //Connect to MySQL
-                                        $con2 = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
-                                        if (!$con2) {
-                                            echo mysqli_connect_errno();
-                                            exit;
-                                        }
-                                        $query_categories = "SELECT * FROM categories";
-                                        $result_categories = mysqli_query($con2, $query_categories);
-                                        // this while loop to print all categories
-                                        while ($row = mysqli_fetch_assoc($result_categories)) {
-                                            ?>
-                                            <tr>
-                                                <td class="text-center"><strong style="color:#1bbae1;">CID.
-                                                        <?= $row['Cate_ID'] ?>
-                                                    </strong>
-                                                </td>
-                                                <td style="color:#1bbae1;">
-                                                    <?= $row['Cate_Name'] ?>
-                                                </td>
-                                                <td class="hidden-xs text-center">
-                                                    <?= $row['Cate_Date'] ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-xs">
-                                                        <a href="page_ecom_Categories_edit.php?id=<?= $row['Cate_ID'] ?>"
-                                                            data-toggle="tooltip" title="Edit" class="btn btn-default"><i
-                                                                class="fa fa-pencil"></i></a>
-                                                        <a href="page_ecom_Categories_delete?id=<?= $row['Cate_ID'] ?>"
-                                                            data-toggle="tooltip" title="Delete"
-                                                            class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                        mysqli_free_result($result_categories);
-
-                                        // Close the connection
-                                        mysqli_close($con2);
-                                        ?>
+                                        <tr>
+                                            <td class="text-center"><strong style="color:#1bbae1;">CID.
+                                                    <?= $row['Cate_ID'] ?>
+                                                </strong>
+                                            </td>
+                                            <td style="color:#1bbae1;">
+                                                <?= $row['Cate_Name'] ?>
+                                            </td>
+                                            <td class="hidden-xs text-center">
+                                                <?= $row['Admin_FName'] . $row['Admin_LName'] ?>
+                                            </td>
+                                            <td class="hidden-xs text-center">
+                                                <?= $row['Cate_Date'] ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group btn-group-xs">
+                                                    <a href="page_ecom_Categories_edit.php?id=<?= $row['Cate_ID'] ?>"
+                                                        data-toggle="tooltip" title="Edit" class="btn btn-default"><i
+                                                            class="fa fa-pencil"></i></a>
+                                                    <button onclick="DeleteOrNot(<?= $row['Cate_ID'] ?>)"
+                                                        data-toggle="tooltip" title="Delete"
+                                                        class="btn btn-xs btn-danger"><i
+                                                            class="fa fa-times"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!-- END All Categories Content -->
@@ -235,6 +225,13 @@ include('./includes/header.php');
 
     <!-- ================ footer Section end Here =============== -->
 
+    <!-- Sends a notification that enables you to complete the deletion or cancellation process  -->
+    <script>
+        function DeleteOrNot(ID) {
+            if (confirm('Action DELETE.\nClick OK to continue.'))
+                window.location = 'page_ecom_Categories_delete?id=' + ID;
+        }
+    </script>
 
     <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
     <script src="js/helpers/ckeditor/ckeditor.js"></script>

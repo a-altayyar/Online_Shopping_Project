@@ -28,9 +28,10 @@ include('./includes/header.php');
 
             //Escape any sepcial characters to avoid SQL Injection
             $name = mysqli_escape_string($con, $_POST['add_name']);
+            $Admin_ID = $_SESSION['A_ID'];
 
             //Insert the data
-            $query = "INSERT INTO `categories` (`Cate_Name`) VALUES ('$name');";
+            $query = "INSERT INTO `categories` (`Cate_Name`, `FK_Admin_ID`) VALUES ('$name', '$Admin_ID');";
             if (mysqli_query($con, $query)) {
                 header("Location: page_ecom_Categories_add.php");
                 exit;
@@ -143,8 +144,10 @@ include('./includes/header.php');
                                 <table id="ecom-Categories" class="table table-bordered table-striped table-vcenter">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th class="text-center" style="width: 70px;">ID</th>
                                             <th>Categories Name</th>
+                                            <th class="hidden-xs text-center">Add By</th>
                                             <th class="hidden-xs text-center">Added</th>
                                             <th class="text-center">Action</th>
                                         </tr>
@@ -158,18 +161,28 @@ include('./includes/header.php');
                                             echo mysqli_connect_errno();
                                             exit;
                                         }
-                                        $query_categories = "SELECT * FROM categories";
+                                        $query_categories = "SELECT `Cate_ID`, `Cate_Name`, `FK_Admin_ID`, `Cate_Date`, admin_list.Admin_FName, admin_list.Admin_LName 
+                                                                FROM `categories`, `admin_list` WHERE categories.FK_Admin_ID = admin_list.Admin_ID;";
                                         $result_categories = mysqli_query($con, $query_categories);
+
                                         // this while loop to print all categories
+                                        $i = 0;
                                         while ($row = mysqli_fetch_assoc($result_categories)) {
+                                            $i++;
                                             ?>
                                             <tr>
+                                                <td class="text-center">
+                                                    <?= $i ?>
+                                                </td>
                                                 <td class="text-center"><strong style="color:#1bbae1;">CID.
                                                         <?= $row['Cate_ID'] ?>
                                                     </strong>
                                                 </td>
                                                 <td style="color:#1bbae1;">
                                                     <?= $row['Cate_Name'] ?>
+                                                </td>
+                                                <td class="hidden-xs text-center">
+                                                    <?= $row['Admin_FName'] . " " . $row['Admin_LName'] ?>
                                                 </td>
                                                 <td class="hidden-xs text-center">
                                                     <?= $row['Cate_Date'] ?>
@@ -179,9 +192,11 @@ include('./includes/header.php');
                                                         <a href="page_ecom_Categories_edit.php?id=<?= $row['Cate_ID'] ?>"
                                                             data-toggle="tooltip" title="Edit" class="btn btn-default"><i
                                                                 class="fa fa-pencil"></i></a>
-                                                        <a href="page_ecom_Categories_delete?id=<?= $row['Cate_ID'] ?>"
+                                                        <button onclick="DeleteOrNot(<?= $row['Cate_ID'] ?>)"
                                                             data-toggle="tooltip" title="Delete"
-                                                            class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                            class="btn btn-xs btn-danger"><i
+                                                                class="fa fa-times"></i></button>
+
                                                     </div>
                                                 </td>
                                             </tr>
@@ -221,6 +236,14 @@ include('./includes/header.php');
     <?php include('./includes/footer.php'); ?>
 
     <!-- ================ footer Section end Here =============== -->
+
+    <!-- Sends a notification that enables you to complete the deletion or cancellation process  -->
+    <script>
+        function DeleteOrNot(ID) {
+            if (confirm('Action DELETE.\nClick OK to continue.'))
+                window.location = 'page_ecom_Categories_delete?id=' + ID;
+        }
+    </script>
 
     <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
     <script src="js/helpers/ckeditor/ckeditor.js"></script>
