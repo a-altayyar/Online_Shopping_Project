@@ -51,8 +51,10 @@
 
     <?php
     session_start();
-    if (!isset($_SESSION['A_ID']))
-        header("Location: login.php");
+
+    // Make sure you are logged in 
+    include('./includes/logged_in.php');
+
 
     $error_fields = array();
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -71,7 +73,7 @@
         if (!is_numeric($_POST['Phone_No'])) { // not numeric
             $error_fields[] = "Phone_not_numeric";
         }
-        if (strlen($_POST['Phone_No']) > 9) { // not less then 10 numbers
+        if (strlen($_POST['Phone_No']) == 9) { // equals 10 numbers
             $error_fields[] = "Phone_less";
         }
         if (!(isset($_POST['login_email']) && filter_input(INPUT_POST, 'login_email', FILTER_VALIDATE_EMAIL))) {
@@ -98,8 +100,8 @@
             $A_Phone = mysqli_escape_string($con, trim($_POST['Phone_No']));
             $A_Email = mysqli_escape_string($con, trim($_POST['login_email']));
             $A_Password = password_hash(trim($_POST['login_password']), PASSWORD_DEFAULT);
-            $A_Type = (isset($_POST['Admin_Type'])) ? 1 : 0; // Number one means System Admin, And number two DB Admin 
-    
+            $A_Type = mysqli_escape_string($con, $_POST['Admin_Type']);
+
             //Insert the data
             $query = "INSERT INTO `admin_list` (`Admin_ID`, `Admin_FName`, `Admin_LName`, `Admin_Phone`, `Admin_Email`, `Admin_PSW`, `Admin_Type`)
                                 VALUES (NULL, '$A_FName', '$A_LName', '$A_Phone', '$A_Email', '$A_Password', '$A_Type');";
@@ -180,7 +182,7 @@
                         <?php
                         if (in_array("Phone_No", $error_fields))
                             echo "<span class='text-danger'>
-                            * Please enter Tour Phone Number</span>";
+                            * Please enter Your Phone Number</span>";
                         elseif (in_array("Phone_not_numeric", $error_fields))
                             echo "<span class='text-danger'>
                             * Should be Number</span>";
@@ -233,8 +235,8 @@
                     <div class="col-xs-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                            <label class="switch switch-info"><input type="checkbox" name="Admin_Type"
-                                    <?= (isset($_POST['Admin_Type'])) ? 'checked' : '' ?>><span> </span></label>
+                            <input type="radio" name="Admin_Type" value="SY" <?= (isset($_POST['Admin_Type']) && $_POST['Admin_Type'] == "SY") ? 'checked' : '' ?>> System Administrator
+                            <input type="radio" name="Admin_Type" value="DB" <?= (isset($_POST['Admin_Type']) && $_POST['Admin_Type'] == "DB") ? 'checked' : '' ?>> DB Administrator
                         </div>
                     </div>
                 </div>
@@ -242,6 +244,10 @@
                 <div class="form-group form-actions">
                     <div class="col-xs-8 text-center">
                         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Register
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger"
+                            onclick="if(confirm('Action Cancel.\nClick OK to continue.')) window.location='index.php';"><i
+                                class="fa fa-angle-right"></i> Cancel
                         </button>
                     </div>
                 </div>

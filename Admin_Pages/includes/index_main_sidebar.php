@@ -5,7 +5,7 @@
         <div class="sidebar-content">
             <!-- Brand -->
             <a href="index.php" class="sidebar-brand">
-                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Pro</strong>UI</span>
+                <img style="width:87px" src="./img/logo/Logo_Egoo.png" alt="">
             </a>
             <!-- END Brand -->
 
@@ -13,10 +13,12 @@
             <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                 <div class="sidebar-user-avatar">
                     <a href="page_ready_user_profile.php">
-                        <img src="img/placeholders/avatars/avatar2.jpg" alt="avatar">
+                        <img style="width: 65px; height: 65px" src="img/Personal_Photos/<?= $_SESSION['A_Photo'] ?>" alt="avatar">
                     </a>
                 </div>
-                <div class="sidebar-user-name">John Doe</div>
+                <div class="sidebar-user-name">
+                    <?= $_SESSION['A_FName'] ?>
+                </div>
                 <div class="sidebar-user-links">
                     <a href="page_ready_user_profile.php" data-toggle="tooltip" data-placement="bottom"
                         title="Profile"><i class="gi gi-user"></i></a>
@@ -25,7 +27,7 @@
                     <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
                     <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Settings"
                         onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
-                    <a href="login.html" data-toggle="tooltip" data-placement="bottom" title="Logout"><i
+                    <a href="logout.php" data-toggle="tooltip" data-placement="bottom" title="Logout"><i
                             class="gi gi-exit"></i></a>
                 </div>
             </div>
@@ -60,7 +62,8 @@
                     <a href="page_ecom_products.php" <?= ($active == "products") ? "class=' active'" : "" ?>>Products</a>
                 </li>
                 <li>
-                    <a href="page_ecom_product_add.php" <?= ($active == "product_add") ? "class=' active'" : "" ?>>Product Add</a>
+                    <a href="page_ecom_product_add.php" <?= ($active == "product_add") ? "class=' active'" : "" ?>>Product
+                        Add</a>
                 </li>
                 <li>
                     <a href="page_ecom_Categories_add.php" <?= ($active == "Categories_add") ? "class=' active'" : "" ?>>Categories View and Add</a>
@@ -74,7 +77,8 @@
                     <span class="sidebar-header-title">Develop Kit</span>
                 </li>
                 <li>
-                    <a href="page_ready_user_profile.php" <?= ($active == "user_profile") ? "class=' active'" : "" ?>>User Profile</a>
+                    <a href="page_ready_user_profile.php" <?= ($active == "user_profile") ? "class=' active'" : "" ?>>User
+                        Profile</a>
                 </li>
                 <li>
                     <a href="page_ready_timeline.php" <?= ($active == "timeline") ? "class=' active'" : "" ?>>Timeline</a>
@@ -85,6 +89,31 @@
                 <li>
                     <a href="page_ready_inbox.php" <?= ($active == "inbox") ? "class=' active'" : "" ?>>Inbox</a>
                 </li>
+
+                <?php
+                if ($_SESSION['A_Type'] == "SY"):
+                    ?>
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-options clearfix"><a href="#" data-toggle="tooltip"
+                                title="Quick Settings"><i class="fa fa-briefcase"></i></a></span>
+                        <span class="sidebar-header-title">System Administrator</span>
+                    </li>
+                    <li>
+                        <a href="register.php" <?= ($active == "Register_New_Emp") ? "class=' active'" : "" ?>>Register New
+                            Employee</a>
+                    </li>
+                    <li>
+                        <a href="page_ecom_Admin_view.php" <?= ($active == "Emp_list") ? "class=' active'" : "" ?>>Employees
+                            List</a>
+                    </li>
+                    <li>
+                        <a href="#" <?= ($active == "") ? "class=' active'" : "" ?>>User
+                            Profile</a>
+                    </li>
+
+                    <?php
+                endif;
+                ?>
             </ul>
             <!-- END Sidebar Navigation -->
 

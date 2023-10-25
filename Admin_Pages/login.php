@@ -59,7 +59,7 @@
         if (!(isset($_POST['login_email']) && filter_input(INPUT_POST, 'login_email', FILTER_VALIDATE_EMAIL))) {
             $error_fields[] = "email";
         }
-        if (!(isset($_POST['login_password']) && strlen($_POST['login_password']) > 6)) {
+        if (!(isset($_POST['login_password']) && strlen($_POST['login_password']) > 5)) {
             $error_fields[] = "Password";
         }
 
@@ -93,6 +93,7 @@
                     $_SESSION['A_Crested_at'] = $row['Created_at'];
                     $_SESSION['A_Type'] = $row['Admin_Type'];
                     $_SESSION['A_Phone'] = $row['Admin_Phone'];
+                    $_SESSION["user_error"][] = array();
                     header("Location: index.php");
                     exit;
                 } else {
