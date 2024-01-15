@@ -30,146 +30,181 @@ include('./includes/header.php');
     $error_fields = array();
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        // Validation "not empty and some value should be numeric"
-        if (!(isset($_POST['add_name']) && !empty($_POST['add_name']))) {
-            $error_fields[] = "Prod_name";
-        }
-        if (!(isset($_POST['add_category']) && !empty($_POST['add_category']))) {
-            $error_fields[] = "category";
-        }
-        if (!(isset($_POST['add_price']) && !empty($_POST['add_price']))) {
-            $error_fields[] = "price";
-        }
-        if (!is_numeric($_POST['add_price'])) { // not numeric
-            $error_fields[] = "price_not_no";
-        }
-        if (!(isset($_POST['add_warranty']) && !empty($_POST['add_warranty']))) {
-            $error_fields[] = "warranty";
-        }
-        if (!is_numeric($_POST['add_warranty'])) { // not numeric
-            $error_fields[] = "warranty_not_no";
-        }
-        if (!($_POST['add_qty'] >= 0)) {
-            $error_fields[] = "qty";
-        }
-        if (!is_numeric($_POST['add_qty'])) { // not numeric
-            $error_fields[] = "qty_not_no";
-        }
-        if (!(isset($_POST['add_short_desc']) && !empty($_POST['add_short_desc']))) {
-            $error_fields[] = "short_desc";
-        }
-        if (!(isset($_POST['add_long_desc']) && !empty($_POST['add_long_desc']))) {
-            $error_fields[] = "long_desc";
-        }
+
+        if (isset($_POST['upload_img'])) {
+
+            // Setting Errors Array
+            $errors = array();
+
+            // **Setting Database File Name
+            $all_file = array();
+
+            // Get Info From The Form
+            $upload_img = $_FILES['add_img'];
+            $img_name = $upload_img['name'];
+            $img_type = $upload_img['type'];
+            $img_tmp = $upload_img['tmp_name'];
+            $img_size = $upload_img['size'];
+            $img_error = $upload_img['error'];
+
+            // Set allowed files Extensions
+            $allowed_extensions = array('jpg', 'gif', 'jpeg', 'png');
 
 
-        // Setting Errors Array
-        $errors = array();
+            // Check file is uploaded
+            if ($img_error[0] == 4) // No File Uploaded
+                $error_fields[] = "empty";
 
-        // **Setting Database File Name
-        $all_file = array();
+            if (!$error_fields) {
 
-        // Get Info From The Form
-        $upload_img = $_FILES['add_img'];
-        $img_name = $upload_img['name'];
-        $img_type = $upload_img['type'];
-        $img_tmp = $upload_img['tmp_name'];
-        $img_size = $upload_img['size'];
-        $img_error = $upload_img['error'];
+                // Start Upload The Images
+                $files_count = count($img_name);
+                for ($i = 0; $i < $files_count; $i++) {
 
-        // Set allowed files Extensions
-        $allowed_extensions = array('jpg', 'gif', 'jpeg', 'png');
+                    // Setting Errors Array
+                    $errors = array();
 
+                    //Get files Extension
+                    $explode_file = explode('.', $img_name[$i]);
+                    $image_extension[$i] = strtolower(end($explode_file));
 
-        // Check file is uploaded
-        if ($img_error[0] == 4) // No File Uploaded
-            $error_fields[] = "empty";
+                    // Get Random Name For File
+                    $img_random[$i] = rand(0, 10000000000) . '.' . $image_extension[$i];
 
-        if (!$error_fields) {
+                    // Check fils size
+                    if ($img_size[$i] > 999999999)
+                        $errors[] = "file_size";
 
-            //Escape any sepcial characters to avoid SQL Injection
-            $Prod_name = mysqli_escape_string($con, $_POST['add_name']);
-            $add_category = mysqli_escape_string($con, $_POST['add_category']);
-            $add_price = mysqli_escape_string($con, $_POST['add_price']);
-            $add_warranty = mysqli_escape_string($con, $_POST['add_warranty']);
-            $add_qty = mysqli_escape_string($con, $_POST['add_qty']);
-            $add_public = mysqli_escape_string($con, $_POST['add_public']);
-            $add_short_desc = mysqli_escape_string($con, $_POST['add_short_desc']);
-            $add_long_desc = mysqli_escape_string($con, $_POST['add_long_desc']);
-            $add_below_desc = mysqli_escape_string($con, $_POST['add_below_desc']);
-            $Admin_ID = $_SESSION['A_ID'];
+                    // Check if File is valid
+                    if (!in_array($image_extension[$i], $allowed_extensions))
+                        $errors[] = "not_valid";
 
-            // If you want to publish the product or not
-            if (isset($_POST['add_public'])):
-                $add_public_status = 1; // Display
-            else:
-                $add_public_status = 0; // Hidden
-            endif;
+                    // Check If Has No Errors
+                    if (empty($errors)):
 
+                        // Move The Files
+                        $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '\My_Projects\Online_Shopping_Project\Admin_Pages\img\product\\';
+                        move_uploaded_file($img_tmp[$i], "$uploads_dir/$img_name[$i]" . "$img_random[$i]");
 
-            // Start Upload The Images
-            $files_count = count($img_name);
-            for ($i = 0; $i < $files_count; $i++) {
+                        // **if You Want To Upload These Accepted Files
+                        $all_file[] = $img_name[$i] . $img_random[$i];
 
-                // Setting Errors Array
-                $errors = array();
+                    else:
 
-                //Get files Extension
-                $explode_file = explode('.', $img_name[$i]);
-                $image_extension[$i] = strtolower(end($explode_file));
+                        // <--  **error can't print fix this  -->
+                        echo '<div style="background-color: #EEE; padding: 10px; margin-bottom: 20px">';
+                        echo 'File Number: ' . ($i + 1) . '<br>';
+                        echo 'File Name: ' . $img_name[$i] . '<br>';
+                        foreach ($errors as $error):
 
-                // Get Random Name For File
-                $img_random[$i] = rand(0, 10000000000) . '.' . $image_extension[$i];
+                            echo $error;
 
-                // Check fils size
-                if ($img_size[$i] > 999999999):
-                    $errors[] = "file_size";
-                endif;
-                // Check if File is valid
-                if (!in_array($image_extension[$i], $allowed_extensions)):
-                    $errors[] = "not_valid";
-                endif;
+                        endforeach;
+                        echo '</div>';
 
-                // Check If Has No Errors
-                if (empty($errors)):
+                    endif;
+                }
 
-                    // Move The Files
-                    $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '\My_Projects\OunProject1\EgoStore_Main_HTML_Template\Store\assets\images\product\\';
-                    move_uploaded_file($img_tmp[$i], "$uploads_dir/$img_name[$i]" . "$img_random[$i]");
+                // This if condition, if there are any images before, they will be merge with new images.
+                if (!empty($row['Prod_Img'])) {
 
-                    // **if You Want To Upload These Accepted Files
-                    $all_file[] = $img_name[$i] . $img_random[$i];
+                    $new_photo = explode(',', $row['Prod_Img']);
 
-                else:
+                    for ($i = 0, $j = count($new_photo) + 1; $i < count($all_file); $i++, $j++)
+                        $new_photo[$j] = $all_file[$i];
 
-                    // <--  error can't print fix this  -->
-                    echo '<div style="background-color: #EEE; padding: 10px; margin-bottom: 20px">';
-                    echo 'File Number: ' . ($i + 1) . '<br>';
-                    echo 'File Name: ' . $img_name[$i] . '<br>';
-                    foreach ($errors as $error):
+                }
 
-                        echo $error;
+                if (isset($new_photo))
+                    $img_field = implode(',', $new_photo);
+                else
+                    $img_field = implode(',', $all_file);
 
-                    endforeach;
-                    echo '</div>';
-
-                endif;
-            }
-            $img_field = implode(',', $all_file);
-            // End Upload Images in implode Array.
+                // End Upload Images in String.
     
-
-            //Insert the data
-            $query = "UPDATE `product` SET `FK_Cate_ID` = " . $add_category . ", `Prod_Name` = ' $Prod_name', `Prod_Published` = '$add_public_status', `Prod_Long_Desc` = '$add_long_desc', `Prod_Short_Desc` = ' $add_short_desc', `Prod_Below_Desc` = '$add_below_desc', `Prod_Price` = '$add_price', `Prod_Stock_Status` = '$add_qty', `Prod_Warranty` = '$add_warranty', `Prod_Img` = '$img_field', `FK_Admin_ID` = '$Admin_ID' 
-                        WHERE `product`.`Prod_ID` = $id LIMIT 1;";
-            if (mysqli_query($con, $query)) {
-                header("Location: page_ecom_products.php");
-                exit(0);
-            } else {
-                echo mysqli_error($con);
+                //Insert the data
+                $query = "UPDATE `product` SET `Prod_Img` = '$img_field' WHERE `product`.`Prod_ID` = $id LIMIT 1;";
+                if (mysqli_query($con, $query)) {
+                    header("Location: page_ecom_product_edit.php?id=$id");
+                    exit(0);
+                } else {
+                    // echo mysqli_error($con);
+                    exit();
+                }
             }
 
         }
+
+        if (isset($_POST['upload_info'])) {
+
+            // Validation "not empty and some value should be numeric"
+            if (!(isset($_POST['add_name']) && !empty($_POST['add_name']))) {
+                $error_fields[] = "Prod_name";
+            }
+            if (!(isset($_POST['add_category']) && !empty($_POST['add_category']))) {
+                $error_fields[] = "category";
+            }
+            if (!(isset($_POST['add_price']) && !empty($_POST['add_price']))) {
+                $error_fields[] = "price";
+            }
+            if (!is_numeric($_POST['add_price'])) { // not numeric
+                $error_fields[] = "price_not_no";
+            }
+            if (!(isset($_POST['add_warranty']) && !empty($_POST['add_warranty']))) {
+                $error_fields[] = "warranty";
+            }
+            if (!is_numeric($_POST['add_warranty'])) { // not numeric
+                $error_fields[] = "warranty_not_no";
+            }
+            if (!($_POST['add_qty'] >= 0)) {
+                $error_fields[] = "qty";
+            }
+            if (!is_numeric($_POST['add_qty'])) { // not numeric
+                $error_fields[] = "qty_not_no";
+            }
+            if (!(isset($_POST['add_short_desc']) && !empty($_POST['add_short_desc']))) {
+                $error_fields[] = "short_desc";
+            }
+            if (!(isset($_POST['add_long_desc']) && !empty($_POST['add_long_desc']))) {
+                $error_fields[] = "long_desc";
+            }
+
+            if (!$error_fields) {
+
+                //Escape any sepcial characters to avoid SQL Injection
+                $Prod_name = mysqli_escape_string($con, $_POST['add_name']);
+                $add_category = mysqli_escape_string($con, $_POST['add_category']);
+                $add_price = mysqli_escape_string($con, $_POST['add_price']);
+                $add_warranty = mysqli_escape_string($con, $_POST['add_warranty']);
+                $add_qty = mysqli_escape_string($con, $_POST['add_qty']);
+                $add_public = mysqli_escape_string($con, $_POST['add_public']);
+                $add_short_desc = mysqli_escape_string($con, $_POST['add_short_desc']);
+                $add_long_desc = mysqli_escape_string($con, $_POST['add_long_desc']);
+                $add_below_desc = mysqli_escape_string($con, $_POST['add_below_desc']);
+                $Admin_ID = $_SESSION['A_ID'];
+
+                // If you want to publish the product or not
+                if (isset($_POST['add_public'])):
+                    $add_public_status = 1; // Display
+                else:
+                    $add_public_status = 0; // Hidden
+                endif;
+
+                //Insert the data
+                $query = "UPDATE `product` SET `FK_Cate_ID` = '$add_category', `Prod_Name` = ' $Prod_name', `Prod_Published` = '$add_public_status', `Prod_Long_Desc` = '$add_long_desc', `Prod_Short_Desc` = ' $add_short_desc', `Prod_Below_Desc` = '$add_below_desc', `Prod_Price` = '$add_price', `Prod_Stock_Status` = '$add_qty', `Prod_Warranty` = '$add_warranty', `FK_Admin_ID` = '$Admin_ID' 
+                            WHERE `product`.`Prod_ID` = $id LIMIT 1;";
+                if (mysqli_query($con, $query)) {
+                    header("Location: page_ecom_product_edit.php?id=$id");
+                    exit(0);
+                } else {
+                    // echo mysqli_error($con);
+                    exit();
+                }
+
+            }
+        }
+
+
     }
     ?>
 
@@ -217,7 +252,7 @@ include('./includes/header.php');
                         <!-- btn-default -->
                         <!-- btn-primary -->
                         <!-- btn-success -->
-                        <a href="page_ecom_products.php" class="btn btn-alt btn-lg btn-default"><i
+                        <a href="page_ecom_product_more.php?id=<?= $id ?>" class="btn btn-alt btn-lg btn-default"><i
                                 class="gi gi-chevron-left"></i><strong> Product</strong> List</a><br><br>
 
                     </div>
@@ -375,96 +410,145 @@ include('./includes/header.php');
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Upload File: </label>
-                                        <div class="col-md-8">
-                                            <div class="input-group">
-                                                <span class="btn btn-default btn-file">
-                                                    <input type="file" name="add_img[]" class="file" multiple="multiple"
-                                                        data-show-upload="false" data-show-caption="true">
-                                                </span>
-                                            </div>
-                                            <?php if (in_array("empty", $error_fields)) {
-                                                echo "<div class='text-danger'> * No File Uploaded! </div>";
-                                            } else {
-                                                if (in_array("file_size", $error_fields)) {
-                                                    echo "<div class='text-danger'> * Please enter a file size not bigger then 6MB </div>";
-                                                }
-                                                if (in_array("not_valid", $error_fields)) {
-                                                    echo "<div class='text-danger'> * File is Not Valid </div>";
-                                                }
-                                            }
-                                            ?>
-                                        </div>
-                                    </div><br>
-
                                     <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
-                                            <button type="submit" class="btn btn-sm btn-primary"><i
+                                            <button type="submit" name="upload_info" class="btn btn-sm btn-primary"><i
                                                     class="fa fa-floppy-o"></i> Save</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i
                                                     class="fa fa-repeat"></i>
                                                 Reset</button>
                                             <input type="button" value="Cancel" class="btn btn-sm btn-danger"
-                                                onclick="if(confirm('Action Cancel.\nClick OK to continue.')) window.location='page_ecom_products.php';" />
+                                                onclick="if(confirm('Action Cancel.\nClick OK to continue.')) window.location='page_ecom_product_more.php?id=<?= $id ?>';" />
                                         </div>
                                     </div>
+
                                 </form>
                                 <!-- END General Data Content -->
                             </div>
                             <!-- END General Data Block -->
                         </div>
+
+
                         <div class="col-lg-6">
+                            <!-- 
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button onclick="function submitForms() {
+                                                document.getElementById('formone').submit(); 
+                                                document.getElementById('formtwo').submit(); }" type="submit"
+                                        class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i>
+                                        Save</button>
+                                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i>
+                                        Reset</button>
+                                </div>
+                            </div>
+                            -->
 
 
                             <!-- Product Images Block -->
-                            <!-- <div class="block"> -->
-                            <!-- Product Images Title -->
-                            <!-- <div class="block-title">
+                            <div class="block">
+                                <!-- Product Images Title -->
+                                <div class="block-title">
                                     <h2><i class="fa fa-picture-o"></i> <strong>Product</strong> Images</h2>
-                                </div> -->
-                            <!-- END Product Images Title -->
+                                </div>
+                                <!-- END Product Images Title -->
 
-                            <!-- Product Images Content -->
-                            <!-- <form action="#" id="formone" method="post" enctype="multipart/form-data"
-                                    class="form-horizontal form-bordered">
+                                <!-- Product Images Content -->
+                                <div class="block-section">
+                                    <form action="#" method="post" enctype="multipart/form-data">
+                                </div>
 
-
-
-                                    <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-3">
-                                            <button onclick="function submitForms() {
-                                                document.getElementById('formone').submit(); 
-                                                document.getElementById('formtwo').submit(); }" type="submit"
-                                                class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i>
-                                                Save</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i
-                                                    class="fa fa-repeat"></i>
-                                                Reset</button>
-                                        </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Upload File: </label>
+                                    <div class="input-group">
+                                        <span class="btn btn-default btn-file">
+                                            <input type="file" name="add_img[]" class="file" multiple="multiple"
+                                                data-show-upload="false" data-show-caption="true">
+                                        </span>
+                                        <?php if (in_array("empty", $error_fields)) {
+                                            echo "<div class='text-danger'> * No File Uploaded! </div>";
+                                        } else {
+                                            if (in_array("file_size", $error_fields)) {
+                                                echo "<div class='text-danger'> * Please enter a file size not bigger then 6MB </div>";
+                                            }
+                                            if (in_array("not_valid", $error_fields)) {
+                                                echo "<div class='text-danger'> * File is Not Valid </div>";
+                                            }
+                                        }
+                                        ?>
                                     </div>
+                                </div>
 
+                                <?php
+                                if (!empty($row['Prod_Img'])) {
+                                    ?>
                                     <table class="table table-bordered table-striped table-vcenter">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 20%;">
-                                                <a href="img/placeholders/photos/photo11.jpg"
-                                                    data-toggle="lightbox-image">
-                                                    <img src="img/placeholders/photos/photo11.jpg" alt=""
-                                                        class="img-responsive center-block" style="max-width: 110px;">
-                                                </a>
-                                            </td>
-                                            <td class="text-center">
-                                                <a href="javascript:void(0)" class="btn btn-xs btn-danger"><i
-                                                        class="fa fa-trash-o"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table> 
-                                </form> -->
-                            <!-- END Product Images Content -->
-                            <!-- </div> -->
+                                        <tbody>
+
+                                            <?php
+                                            $explode_img = explode(',', $row['Prod_Img']);
+                                            $count_img = count($explode_img);
+                                            if (!empty($explode_img))
+                                                for ($i = 0; $i < $count_img; $i++):
+                                                    ?>
+
+                                                    <tr>
+                                                        <td style="width: 20%;">
+                                                            <a href="img\product\<?= $explode_img[$i] ?>"
+                                                                data-toggle="lightbox-image">
+                                                                <img src="img\product\<?= $explode_img[$i] ?>" alt=""
+                                                                    class="img-responsive center-block" style="max-width: 110px;">
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <label class="switch switch-primary">
+                                                                <input type="checkbox" checked><span></span>
+                                                            </label>
+                                                            Published?
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="page_ecom_product_delete_img.php?name=<?= $explode_img[$i] ?>&id=<?= $id ?>&index=<?= $i ?>"
+                                                                class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i>
+                                                                Delete</a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <?php
+                                                endfor;
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <div style="background-color: #EEE; padding: 15px; margin-bottom: 20px">*Your photo
+                                        library is empty</div>
+                                    <?php
+                                }
+                                ?>
+
+                                <div class="form-group form-actions">
+                                    <div class="col-md-offset-3">
+                                        <button type="submit" name="upload_img" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-floppy-o"></i> Save</button>
+                                        <input type="button" value="Cancel" class="btn btn-sm btn-danger"
+                                            onclick="if(confirm('Action Cancel.\nClick OK to continue.')) window.location='page_ecom_product_more.php?id=<?= $id ?>';" />
+                                    </div>
+                                </div>
+
+
+                                </form>
+                                <!-- END Product Images Content -->
+                            </div>
                             <!-- END Product Images Block -->
+
+
+
+
+
+
+
 
                             <!-- Meta Data Block -->
                             <div class="block">
@@ -509,7 +593,8 @@ include('./includes/header.php');
                                             <button type="submit" class="btn btn-sm btn-primary"><i
                                                     class="fa fa-floppy-o"></i> Save</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i
-                                                    class="fa fa-repeat"></i> Reset</button>
+                                                    class="fa fa-repeat"></i>
+                                                Reset</button>
                                         </div>
                                     </div>
                                 </form>
@@ -544,7 +629,7 @@ include('./includes/header.php');
     //Close the connection
     mysqli_close($con);
     ?>
-
+    
     <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
     <script src="js/helpers/ckeditor/ckeditor.js"></script>
 </body>

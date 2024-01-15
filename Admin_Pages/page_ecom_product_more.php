@@ -218,7 +218,6 @@ include('./includes/header.php');
 
                                     <div class="gallery" data-toggle="lightbox-gallery">
                                         <div class="row">
-
                                             <?php
                                             $explode_img = explode(',', $row['Prod_Img']);
                                             foreach ($explode_img as $img):
@@ -231,33 +230,13 @@ include('./includes/header.php');
                                                             <img src="img/product/<?= $img ?>" alt="image">
                                                         </a>
                                                     <?php else: ?>
-                                                        <img src="img/product/nothing_img.png" alt="image" />
+                                                        <img src="img/product/no-results.png" alt="image" />
                                                     <?php endif; ?>
                                                 </div>
 
                                                 <?php
                                             endforeach;
                                             ?>
-
-                                            <?php
-                                            // Used echo...
-                                            // $explode_img = explode(',', $row['Prod_Img']);
-                                            // foreach ($explode_img as $img):
-                                            
-                                            //     echo "<div class='col-sm-4'>";
-                                            //     if (!empty($img)):
-                                            //         echo "<a href='img/product/" . $img . "' class='gallery-link'
-                                            //                 title='Image Info'>
-                                            //                 <img src='img/product/" . $img . "' alt='image'>
-                                            //             </a>";
-                                            //     else:
-                                            //         echo "<img src='img/product/nothing_img.png' alt='image' />";
-                                            //     endif;
-                                            //     echo "</div>";
-                                            
-                                            // endforeach;
-                                            ?>
-
                                         </div>
                                     </div>
 

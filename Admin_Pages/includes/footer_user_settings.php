@@ -94,20 +94,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '\My_Projects\Online_Shopping_Project\Admin_Pages\img\Personal_Photos\\';
         $path = $uploads_dir . $_SESSION['A_Photo'];
-        if (unlink($path)) {
+        if (file_exists($path)) {
+            unlink($path);
             if ($img_error == UPLOAD_ERR_OK) {
                 $avatar = basename($img_name);
                 move_uploaded_file($img_tmp, "$uploads_dir/$avatar" . "$img_random");
 
             } else {
-                echo "File can't be uploaded";
+                // echo "File can't be uploaded";
                 exit;
             }
         } else {
-            echo "File can't be Deleted";
+            // echo "File can't be Deleted";
             exit;
         }
-
 
         //Update the data
         $query = "UPDATE `admin_list` SET `Admin_FName` = '$A_FName', `Admin_LName` = '$A_LName', `Admin_Email` = '$A_Email', `Admin_Phone` = '$A_Phone', `Admin_Photo` = '$avatar" . "$img_random' WHERE `admin_list`.`Admin_ID` = " . $_SESSION['A_ID'] . " LIMIT 1;";
